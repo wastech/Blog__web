@@ -1,17 +1,24 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
-  </q-page>
+  <div class="main">
+    <app-header />
+  </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import appHeader from "../components/app-header.vue";
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+export default {
+  components: { appHeader },
+  name: "PageIndex",
+  data() {
+    return {};
+  },
+};
 </script>
+
+<style scoped>
+.main {
+  max-width: 970px;
+  margin: 0 auto;
+}
+</style>
