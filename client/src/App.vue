@@ -12,9 +12,10 @@ export default defineComponent({
 </script>
 <style scoped>
 .app {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lora", serif;
   font-size: 16px;
   line-height: 1.5;
   color: #545454;
+  background-color: #fff;
 }
 </style>

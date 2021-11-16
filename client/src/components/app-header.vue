@@ -1,14 +1,19 @@
 <template>
-  <div class="q-pa-md">
+  <div class="">
     <q-toolbar class="text-grey shadow-none rounded-borders" no-caps>
       <q-btn flat label="Homepage" no-caps />
       <q-btn flat label="Posts" no-caps />
       <q-btn flat label="About Us" no-caps />
       <q-btn flat label="Contact Us" no-caps />
-       <q-btn flat label="Purchase!" no-caps />
+      <q-btn flat label="Purchase!" no-caps />
       <q-space />
       <q-tabs v-model="tab" shrink no-caps class="text-dark">
-        <q-icon :name="icon.iconName" v-for="icon in icons" :key="icon"  class=" q-mr-lg" />
+        <q-icon
+          :name="icon.iconName"
+          v-for="icon in icons"
+          :key="icon"
+          class="q-mr-lg"
+        />
       </q-tabs>
     </q-toolbar>
   </div>
