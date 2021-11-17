@@ -47,10 +47,30 @@
         </div>
       </div>
 
-      <div class="button">
-        <q-btn outline rounded label="Continue Reading" no-caps />
+      <div class="button q-mb-xl">
+        <q-btn
+          outline
+          rounded
+          color="orange-6"
+          label="Continue Reading"
+          no-caps
+          class="q-mr-lg"
+        />
+
+        <q-icon name="fas fa-share " size="sm" class="q-mr-lg"></q-icon>
+        <span>
+          <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-lg"></q-icon>
+          <q-icon name="fab fa-twitter" size="xs" class="q-mr-lg"></q-icon>
+          <q-icon
+            name="fab fa-google-plus-g"
+            size="xs"
+            class="q-mr-lg"
+          ></q-icon>
+        </span>
       </div>
+
     </div>
+   <hr style="color:#ccc">
   </div>
 </template>
 
@@ -94,9 +114,64 @@ span {
   font-size: 14px;
   line-height: 26px;
 }
-.q-btn:hover {
-  background-color: #f47e00 !important;
-  border-color: #f47e00;
+.fas.fa-share {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 7px;
+  cursor: pointer;
+  visibility: visible;
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+.fa-facebook-f {
+  border: 1px solid #234e9a;
+  border-radius: 50%;
+  padding: 7px;
+  color: #234e9a;
+  cursor: pointer;
+  visibility: invisible;
+}
+.fa-facebook-f:hover {
+  border: 1px solid #234e9a;
+  border-radius: 50%;
+  padding: 7px;
   color: #fff;
+  background-color: #234e9a;
+  cursor: pointer;
+  visibility: invisible;
+}
+.fa-twitter {
+  border: 1px solid #32aadc;
+  border-radius: 50%;
+  padding: 7px;
+  color: #32aadc;
+  cursor: pointer;
+  visibility: invisible;
+}
+.fa-twitter:hover {
+  border: 1px solid #32aadc;
+  border-radius: 50%;
+  padding: 7px;
+  color: #fff;
+  background-color: #32aadc;
+  cursor: pointer;
+  visibility: invisible;
+}
+.fab.fa-google-plus-g {
+  border: 1px solid #e2131e;
+  border-radius: 50%;
+  padding: 7px;
+  color: #e2131e;
+  cursor: pointer;
+  visibility: invisible;
+}
+.fab.fa-google-plus-g:hover {
+  border: 1px solid #e2131e;
+  border-radius: 50%;
+  padding: 7px;
+  color: #fff;
+  background-color: #e2131e;
+  cursor: pointer;
+  visibility: invisible;
 }
 </style>
