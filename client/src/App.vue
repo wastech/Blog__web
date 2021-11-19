@@ -1,12 +1,17 @@
 <template>
   <div class="app">
+    <app-header/>
     <router-view />
+    <app-profile/>
   </div>
 </template>
 <script>
 import { defineComponent } from "vue";
+import appHeader from "./components/app-header.vue";
+import AppProfile from "./components/app-profile.vue";
 
 export default defineComponent({
+    components: { appHeader, AppProfile },
   name: "App",
 });
 </script>

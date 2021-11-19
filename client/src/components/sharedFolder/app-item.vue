@@ -3,14 +3,14 @@
     <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <div class="image">
       <img
-        src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/cheerful-loving-couple-bakers-drinking-coffee-PCAVA6B-2.jpg"
+        :src="item.image"
         alt=""
       />
     </div>
     <div class="text">
       <div class="title text-left text-dark q-mt-sm q-mb-xs">
         <div class="text-h3 text-bold text-capitalize">
-          Loft Office With Vintage Decor For Creative Working
+{{item.title}}
         </div>
       </div>
 
@@ -19,31 +19,24 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-        <span class="q-mr-md">In <a href="">images post</a> </span>
-        <span class="q-mr-md">Tags <a href="">design</a> </span>
-        <span class="q-mr-md">May 17, 2015</span>
-        <span class="q-mr-md"><a href="">Leave a comment</a> </span>
+        <span class="q-mr-md">In <a href="">{{item.category}}</a> </span>
+        <span class="q-mr-md">Tags <a href="">{{item.tags}}</a> </span>
+        <span class="q-mr-md">{{item.createdAt}}</span>
+        <span class="q-mr-md"><a href="">2 comments</a> </span>
         <span
           ><img
-            src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author-50x50.jpg"
+            :src="item.authorImage"
             alt=""
             class="avatar q-mr-md"
         /></span>
-        <span class="q-mr-md text-capitalize"><a href="">aremu aremu</a> </span>
+        <span class="q-mr-md text-capitalize"><a href="">{{item.name}}</a> </span>
       </div>
       <!-- icon section ends here -->
 
       <!-- paragraph starts here -->
       <div class="paragraph q-my-md text-justify">
         <div class="text-body1">
-          It’s no secret that the digital industry is booming. From exciting
-          startups to global brands, companies are reaching out to digital
-          agencies, responding to the new possibilities available. However, the
-          industry is fast becoming overcrowded, heaving with agencies offering
-          similar services — on the surface, at least. Producing creative, fresh
-          projects is the key to standing out. Unique side projects are the best
-          place to innovate, but balancing commercially and creatively lucrative
-          work is tricky. So, this article looks at
+         {{item.description}}
         </div>
       </div>
 
@@ -52,6 +45,7 @@
           outline
           rounded
           color="orange-6"
+          text-color="primary"
           label="Continue Reading"
           no-caps
           class="q-mr-lg"
@@ -68,14 +62,15 @@
           ></q-icon>
         </span>
       </div>
-
     </div>
-   <hr style="color:#ccc">
+    <q-separator />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["item"]
+};
 </script>
 
 <style scoped>

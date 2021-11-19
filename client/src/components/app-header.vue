@@ -2,7 +2,22 @@
   <div class="">
     <q-toolbar class="text-grey shadow-none rounded-borders" no-caps>
       <q-btn flat label="Homepage" no-caps />
-      <q-btn flat label="Posts" no-caps />
+      <!-- <q-btn flat label="Posts" no-caps /> -->
+      <q-btn-dropdown stretch flat label="Posts" no-caps>
+        <q-list>
+          <q-item clickable v-ripple>
+            <q-item-section>Image Post</q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section>Video Post</q-item-section>
+          </q-item>
+
+          <q-item clickable v-ripple>
+            <q-item-section>Audio Post</q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
       <q-btn flat label="About Us" no-caps />
       <q-btn flat label="Contact Us" no-caps />
       <q-btn flat label="Purchase!" no-caps />
@@ -16,6 +31,7 @@
         />
       </q-tabs>
     </q-toolbar>
+    <q-separator/>
   </div>
 </template>
 <script>
@@ -35,3 +51,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.q-toolbar  {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+</style>

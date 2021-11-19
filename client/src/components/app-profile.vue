@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="row q-col-gutter-xs">
+  <div class="main">
+    <div class="row q-col-gutter-md">
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
         <div class="title q-my-md">
           <div class="text-h5">About Me</div>
@@ -38,7 +38,7 @@
               <a href="/" class="a">about 2 months ago</a>
             </div>
           </div>
-          <hr style="color: #ccc" />
+          <q-separator />
         </div>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
@@ -55,6 +55,11 @@ export default {};
 </script>
 
 <style scoped>
+.main {
+  max-width: 970px;
+  margin: 0 auto;
+}
+
 .text-h5 {
   font-size: 15px;
   font-weight: bold;
@@ -63,6 +68,7 @@ export default {};
 img {
   border-radius: 15px;
   object-fit: cover;
+  width: 100%;
   height: auto;
 }
 .body2 {
