@@ -3,20 +3,22 @@
     <div v-for="item in items" :key="item">
       <app-item :item="item" />
     </div>
-    <app-author/>
+    <app-author />
     <related-post />
-    <reply-form/>
+    <app-comment />
+    <reply-form />
   </div>
 </template>
 
 <script>
-import AppAuthor from '../components/app-author.vue';
+import AppAuthor from "../components/app-author.vue";
+import AppComment from "../components/app-comment.vue";
 import RelatedPost from "../components/related-post.vue";
-import ReplyForm from '../components/reply-form.vue';
+import ReplyForm from "../components/reply-form.vue";
 import AppItem from "../components/sharedFolder/app-item.vue";
 
 export default {
-  components: { AppItem, RelatedPost, ReplyForm, AppAuthor },
+  components: { AppItem, RelatedPost, ReplyForm, AppAuthor, AppComment },
   name: "PageIndex",
   data() {
     return {
