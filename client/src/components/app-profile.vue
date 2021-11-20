@@ -1,49 +1,54 @@
 <template>
-  <div class="main">
-    <div class="row q-col-gutter-md">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-        <div class="title q-my-md">
-          <div class="text-h5">About Me</div>
-        </div>
-        <div class="image">
-          <img
-            src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Author.jpg"
-            alt=""
-          />
-        </div>
-        <div class="text q-my-sm">
-          <div class="text-body2">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua.
+  <div>
+    <q-separator />
+    <div class="main">
+      <div class="row q-col-gutter-md">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+          <div class="title q-my-md">
+            <div class="text-h5">About Me</div>
           </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 tweet__section">
-        <div class="title q-my-md">
-          <div class="text-h5">Tweets</div>
-        </div>
-        <div class="tweet q-my-md">
-          <div class="text-body1">
-            <q-icon name="fab fa-twitter" size="xs" class="q-mr-sm"></q-icon>
-            <span class="text-bold"
-              ><a href="/" class="a__about">Ahmad Works</a>
-            </span>
-            @AppleSupport If you need to know the version number, its 9.2.1
-            (13D15)
+          <div class="image">
+            <img
+              src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Author.jpg"
+              alt=""
+            />
           </div>
-
-          <div class="duration">
-            <div class="text-caption">
-              <a href="/" class="a">about 2 months ago</a>
+          <div class="text q-my-sm">
+            <div class="text-body2">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua.
             </div>
           </div>
-          <q-separator />
         </div>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-        <div class="title q-my-md">
-          <div class="text-h5">Instagram</div>
+        <div
+          class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 tweet__section"
+        >
+          <div class="title q-my-md">
+            <div class="text-h5">Tweets</div>
+          </div>
+          <div class="tweet q-my-md">
+            <div class="text-body1">
+              <q-icon name="fab fa-twitter" size="xs" class="q-mr-sm"></q-icon>
+              <span class="text-bold"
+                ><a href="/" class="a__about">Ahmad Works</a>
+              </span>
+              @AppleSupport If you need to know the version number, its 9.2.1
+              (13D15)
+            </div>
+
+            <div class="duration">
+              <div class="text-caption">
+                <a href="/" class="a">about 2 months ago</a>
+              </div>
+            </div>
+            <q-separator />
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+          <div class="title q-my-md">
+            <div class="text-h5">Instagram</div>
+          </div>
         </div>
       </div>
     </div>

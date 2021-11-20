@@ -1,24 +1,24 @@
 <template>
   <div class="main">
-    <!-- <app-header /> -->
     <div v-for="item in items" :key="item">
       <app-item :item="item" />
     </div>
-
+    <related-post />
+    <reply-form/>
   </div>
 </template>
 
 <script>
-// import appHeader from "../components/app-header.vue";
+import RelatedPost from "../components/related-post.vue";
+import ReplyForm from '../components/reply-form.vue';
 import AppItem from "../components/sharedFolder/app-item.vue";
 
 export default {
-  components: { AppItem },
+  components: { AppItem, RelatedPost, ReplyForm },
   name: "PageIndex",
   data() {
     return {
       current: 3,
-
       items: [
         {
           image:
