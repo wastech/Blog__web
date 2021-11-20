@@ -1,7 +1,9 @@
 <template>
   <div class="q-mb-xl">
-    <div class="text-h6 q-my-md text-weight-bold q-my-sm">Leave a reply:</div>
-    <div class="text-body1 q-my-sm">Your email address will not be published.</div>
+    <div class="text-h6 q-my-md text-weight-bold">Leave a reply:</div>
+    <div class="text-body1 q-my-sm">
+      Your email address will not be published.
+    </div>
     <q-form>
       <q-input
         outlined
@@ -11,11 +13,11 @@
         type="textarea"
       />
       <div class="row q-my-md q-col-gutter-sm">
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4">
           <q-input outlined dense v-model="text" placeholder="name" />
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4">
           <q-input
             v-model="email"
             outlined
@@ -24,7 +26,7 @@
             placeholder="email"
           />
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4">
           <q-input
             v-model="url"
             dense

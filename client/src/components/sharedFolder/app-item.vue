@@ -2,15 +2,12 @@
   <div class="main">
     <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <div class="image">
-      <img
-        :src="item.image"
-        alt=""
-      />
+      <img :src="item.image" alt="" />
     </div>
     <div class="text">
       <div class="title text-left text-dark q-mt-sm q-mb-xs">
         <div class="text-h3 text-bold text-capitalize">
-{{item.title}}
+          {{ item.title }}
         </div>
       </div>
 
@@ -19,24 +16,27 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-        <span class="q-mr-md">In <a href="">{{item.category}}</a> </span>
-        <span class="q-mr-md">Tags <a href="">{{item.tags}}</a> </span>
-        <span class="q-mr-md">{{item.createdAt}}</span>
+        <span class="q-mr-md"
+          >In <a href="">{{ item.category }}</a>
+        </span>
+        <span class="q-mr-md"
+          >Tags <a href="">{{ item.tags }}</a>
+        </span>
+        <span class="q-mr-md">{{ item.createdAt }}</span>
         <span class="q-mr-md"><a href="">2 comments</a> </span>
         <span
-          ><img
-            :src="item.authorImage"
-            alt=""
-            class="avatar q-mr-md"
+          ><img :src="item.authorImage" alt="" class="avatar q-mr-md"
         /></span>
-        <span class="q-mr-md text-capitalize"><a href="">{{item.name}}</a> </span>
+        <span class="q-mr-md text-capitalize"
+          ><a href="">{{ item.name }}</a>
+        </span>
       </div>
       <!-- icon section ends here -->
 
       <!-- paragraph starts here -->
       <div class="paragraph q-my-md text-justify">
         <div class="text-body1">
-         {{item.description}}
+          {{ item.description }}
         </div>
       </div>
 
@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  props: ["item"]
+  props: ["item"],
 };
 </script>
 

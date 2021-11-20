@@ -1,9 +1,9 @@
 <template>
   <div class="q-my-xl">
-    <div class="text-h6 q-my-md text-weight-bold" >Related Posts:</div>
+    <div class="text-h6 q-my-md text-weight-bold">Related Posts:</div>
     <div class="row q-col-gutter-lg">
       <div
-        class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"
+        class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 q-my-xs"
         v-for="item in items"
         :key="item"
       >
@@ -59,6 +59,5 @@ img {
   word-break: break-word;
 }
 .text-h3 {
-
 }
 </style>
