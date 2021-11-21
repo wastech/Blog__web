@@ -20,6 +20,11 @@ const routes = [
     name: "tags",
     component: () => import("pages/tags.vue"),
   },
+  {
+    path: "/contact",
+    name: "contact",
+    component: () => import("pages/contact.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it

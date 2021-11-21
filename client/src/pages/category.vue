@@ -100,7 +100,6 @@ span {
   border-radius: 30px;
   color: #000;
   box-sizing: border-box;
-  margin: 4px;
   font-size: 17px;
 }
 </style>
