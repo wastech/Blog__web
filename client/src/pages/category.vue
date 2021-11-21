@@ -1,7 +1,8 @@
 <template>
   <div class="main">
-    <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <!-- <app-header /> -->
+    <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
+
     <div v-for="item in items" :key="item">
       <app-item :item="item" />
     </div>
@@ -17,8 +18,6 @@ export default {
   name: "PageIndex",
   data() {
     return {
-      current: 3,
-
       items: [
         {
           image:

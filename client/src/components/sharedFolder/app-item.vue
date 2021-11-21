@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <div class="image">
       <img :src="item.image" alt="" />
     </div>

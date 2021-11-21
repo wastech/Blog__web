@@ -10,6 +10,12 @@ const routes = [
     component: () => import("pages/detail-page.vue"),
   },
 
+  {
+    path: "/category",
+    name: "category",
+    component: () => import("pages/category.vue"),
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {
