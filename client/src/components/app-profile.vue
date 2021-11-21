@@ -3,7 +3,7 @@
     <q-separator />
     <div class="main">
       <div class="row q-col-gutter-md">
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
           <div class="title q-my-md">
             <div class="text-h5">About Me</div>
           </div>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div
-          class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 tweet__section"
+          class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 tweet__section"
         >
           <div class="title q-my-md">
             <div class="text-h5">Tweets</div>
@@ -45,11 +45,15 @@
             <q-separator />
           </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
           <div class="title q-my-md">
             <div class="text-h5">Instagram</div>
           </div>
         </div>
+      </div>
+      <q-separator />
+      <div class="text-body2 q-my-lg">
+        &copy; 2015 Writing Designs, INC. All Rights Reserved.
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@
         v-for="comment in comments"
         :key="comment"
       >
-        <div class="col-xs-3 col-sm-3 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
+        <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
           <div class="image">
             <img :src="comment.image" alt="" />
           </div>
@@ -28,7 +28,7 @@
         >
           <div class="text">
             <div class="text-h4 q-my-xs text-weight-bold">
-              <a href="">{{ comment.name }}</a>
+              <a href="">{{ comment.name }}</a> <q-icon name="far fa-edit" />
             </div>
             <div class="text-caption" style="color: #acabab">
               {{ comment.createdAt }}-
@@ -53,7 +53,7 @@
           v-for="comment in comments"
           :key="comment"
         >
-          <div class="col-xs-3 col-sm-3 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
+          <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
             <div class="image">
               <img :src="comment.image" alt="" />
             </div>
@@ -61,7 +61,7 @@
           <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 col-xl-10 q-ml-sm">
             <div class="text">
               <div class="text-h4 text-weight-bold">
-                <a href="">{{ comment.name }} </a>
+                <a href="">{{ comment.name }} </a> <q-icon name="far fa-edit" />
               </div>
               <div class="text-caption" style="color: #acabab">
                 {{ comment.createdAt }} -
@@ -103,7 +103,7 @@
                 <div class="row q-my-md q-col-gutter-sm">
                   <div
                     class="
-                      col-xs-12 col-sm-6 col-md-4
+                      col-xs-12 col-sm-4 col-md-4
                       q-my-xs
                       col-lg-4 col-xl-4
                     "
@@ -113,7 +113,7 @@
 
                   <div
                     class="
-                      col-xs-12 col-sm-6 col-md-4
+                      col-xs-12 col-sm-4 col-md-4
                       q-my-xs
                       col-lg-4 col-xl-4
                     "
@@ -128,7 +128,7 @@
                   </div>
                   <div
                     class="
-                      col-xs-12 col-sm-6 col-md-4
+                      col-xs-12 col-sm-4 col-md-4
                       q-my-xs
                       col-lg-4 col-xl-4
                     "
@@ -181,13 +181,13 @@
               />
               <div class="row q-my-md q-col-gutter-sm">
                 <div
-                  class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4"
+                  class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4"
                 >
                   <q-input outlined dense v-model="text" placeholder="name" />
                 </div>
 
                 <div
-                  class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4"
+                  class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4"
                 >
                   <q-input
                     v-model="email"
@@ -198,7 +198,7 @@
                   />
                 </div>
                 <div
-                  class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4"
+                  class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4"
                 >
                   <q-input
                     v-model="url"
@@ -240,11 +240,11 @@
           type="textarea"
         />
         <div class="row q-my-md q-col-gutter-sm">
-          <div class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4">
+          <div class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4">
             <q-input outlined dense v-model="text" placeholder="name" />
           </div>
 
-          <div class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4">
+          <div class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4">
             <q-input
               v-model="email"
               outlined
@@ -253,7 +253,7 @@
               placeholder="email"
             />
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-4 q-my-xs col-lg-4 col-xl-4">
+          <div class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4">
             <q-input
               v-model="url"
               dense
@@ -377,5 +377,10 @@ a:hover {
 }
 span {
   color: #f47e00;
+}
+.far {
+  color: #ededed;
+  margin-left: 10px;
+  font-size: 14px;
 }
 </style>
