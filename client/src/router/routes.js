@@ -15,6 +15,11 @@ const routes = [
     name: "category",
     component: () => import("pages/category.vue"),
   },
+  {
+    path: "/tags",
+    name: "tags",
+    component: () => import("pages/tags.vue"),
+  },
 
   // Always leave this as last one,
   // but you can also remove it

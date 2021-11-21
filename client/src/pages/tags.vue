@@ -4,7 +4,7 @@
     <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
     <div class="title q-pa-xs">
       <div class="text-h5 text-weight-bolder">
-        <span class="q-pa-sm">Category: Liferrr Style</span>
+        <span class="q-pa-sm">Tags: man</span>
       </div>
     </div>
     <div v-for="item in items" :key="item">
@@ -100,7 +100,6 @@ span {
   border-radius: 30px;
   color: #000;
   box-sizing: border-box;
-  margin: 4px;
   font-size: 17px;
 }
 </style>
