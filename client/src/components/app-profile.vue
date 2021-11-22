@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div >
     <q-separator />
-    <div class="main">
+    <div class="main q-pa-md">
       <div class="row q-col-gutter-md">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
           <div class="title q-my-md">

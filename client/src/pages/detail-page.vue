@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main q-pa-md">
     <div v-for="item in items" :key="item">
       <app-item :item="item" />
     </div>

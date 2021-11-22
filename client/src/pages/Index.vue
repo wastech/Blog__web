@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main q-pa-md">
     <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <!-- <app-header /> -->
     <div v-for="item in items" :key="item">
