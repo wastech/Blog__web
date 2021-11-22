@@ -1,17 +1,19 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+  <q-page>
+    <CardSocial />
+    <app-table />
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import AppTable from "../components/app-table.vue";
+import CardSocial from "../components/cards/CardSocial";
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+export default {
+  name: "PageIndex",
+  components: { CardSocial, AppTable },
+  data() {
+    return {};
+  },
+};
 </script>

@@ -1,17 +1,17 @@
 <template>
   <div class="app">
-    <!-- <app-header /> -->
+    <app-header />
     <router-view />
-    <!-- <app-profile /> -->
+    <app-profile />
   </div>
 </template>
 <script>
 import { defineComponent } from "vue";
-// import appHeader from "./components/app-header.vue";
-// import AppProfile from "./components/app-profile.vue";
+import appHeader from "./components/app-header.vue";
+import AppProfile from "./components/app-profile.vue";
 
 export default defineComponent({
-  // components: { appHeader, AppProfile },
+  components: { appHeader, AppProfile },
   name: "App",
 });
 </script>
