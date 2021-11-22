@@ -38,15 +38,15 @@
         debounce="300"
         v-model="filter"
         placeholder="Search"
-      >
-        <template v-slot:append>
+      />
+      <!-- <template v-slot:append>
           <q-icon name="search" />
-        </template>
-      </q-input>
+        </template> -->
+      <!-- </q-input> -->
 
       <q-btn
-        class="q-ml-sm"
-        icon="fas fa-search"
+        class="q-ml-xs"
+        icon="search"
         @click="show_filter = !show_filter"
         flat
       />
@@ -58,7 +58,7 @@
 export default {
   data() {
     return {
-      show_filter:false,
+      show_filter: false,
       icons: [
         { iconName: "fab fa-facebook-f" },
         { iconName: "fab fa-twitter" },
@@ -75,7 +75,7 @@ export default {
 
 <style scoped>
 .q-toolbar {
-  max-width:70%;
+  max-width: 70%;
   margin: 0 auto;
 }
 </style>
