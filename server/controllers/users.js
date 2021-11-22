@@ -1,6 +1,7 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const User = require("../models/User");
+const cloudinary = require("cloudinary");
 
 // @desc      Get all users
 // @route     GET /api/v1/auth/users
@@ -52,7 +53,18 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 // @route     DELETE /api/v1/auth/users/:id
 // @access    Private/Admin
 exports.deleteUser = asyncHandler(async (req, res, next) => {
-  await User.findByIdAndDelete(req.params.id);
+  const user = await User.findByIdAndDelete(req.params.id);
+  if (!user) {
+    return next(
+      new ErrorResponse(`User does not found with id: ${req.params.id}`)
+    );
+  }
+
+  // Remove avatar from cloudinary
+  const image_id = user.avatar.public_id;
+  await cloudinary.v2.uploader.destroy(image_id);
+
+  await user.remove();
 
   res.status(200).json({
     success: true,

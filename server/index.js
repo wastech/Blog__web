@@ -3,11 +3,12 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const colors = require("colors");
-const fileupload = require("express-fileupload");
+const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const xss = require("xss-clean");
+const cloudinary = require("cloudinary");
 const rateLimit = require("express-rate-limit");
 const hpp = require("hpp");
 const cors = require("cors");
@@ -21,6 +22,12 @@ dotenv.config({ path: "./config/config.env" });
 connectDB();
 
 // Route files
+// Setting up cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const auth = require("./routes/auth");
 const users = require("./routes/users");
@@ -39,7 +46,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // File uploading
-app.use(fileupload());
+app.use(fileUpload({ useTempFiles: true }));
 
 // Sanitize data
 app.use(mongoSanitize());
