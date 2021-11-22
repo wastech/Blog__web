@@ -12,12 +12,20 @@
           </q-card-section>
           <q-card-section>
             <q-form class="q-gutter-md">
-              <q-input filled v-model="username" label="Username" lazy-rules />
+              <q-input
+                filled
+                v-model="email"
+                type="email"
+                :rules="[(val) => !!val || 'Field is required']"
+                label="email"
+                lazy-rules
+              />
 
               <q-input
                 type="password"
                 filled
                 v-model="password"
+                :rules="[(val) => !!val || 'Field is required']"
                 label="Password"
                 lazy-rules
               />
@@ -25,8 +33,7 @@
               <div>
                 <q-btn
                   label="Login"
-                  to="/"
-                  type="button"
+                  type="submit"
                   class="full-width"
                   color="primary"
                 />
@@ -43,8 +50,8 @@
 export default {
   data() {
     return {
-      username: "Pratik",
-      password: "12345",
+      email: "",
+      password: "",
     };
   },
 };
