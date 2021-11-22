@@ -50,14 +50,14 @@
           class="q-mr-lg"
         />
 
-        <q-icon name="fas fa-share " size="sm" class="q-mr-lg"></q-icon>
+        <q-icon name="fas fa-share " size="sm" class="q-mr-xs"></q-icon>
         <span>
-          <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-lg"></q-icon>
-          <q-icon name="fab fa-twitter" size="xs" class="q-mr-lg"></q-icon>
+          <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs"></q-icon>
+          <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs"></q-icon>
           <q-icon
             name="fab fa-google-plus-g"
             size="xs"
-            class="q-mr-lg"
+            class="q-mr-xs"
           ></q-icon>
         </span>
       </div>
