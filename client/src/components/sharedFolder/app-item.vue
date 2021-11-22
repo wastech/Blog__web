@@ -4,14 +4,14 @@
       <img :src="item.image" alt="" />
     </div>
     <div class="text">
-      <div class="title text-left text-dark q-mt-sm q-mb-xs">
+      <div class="title text-left text-dark q-mt-sm q-mb-none">
         <div class="text-h3 text-bold text-capitalize">
           {{ item.title }}
         </div>
       </div>
 
       <!-- icon section starts here -->
-      <div class="blog__span text-left q-my-xs">
+      <div class="blog__span text-left q-my-no-margin">
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
