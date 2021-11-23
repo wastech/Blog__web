@@ -32,6 +32,9 @@ cloudinary.config({
 const auth = require("./routes/auth");
 const users = require("./routes/users");
 const categories = require("./routes/categories");
+const comments = require("./routes/comments");
+const replies = require("./routes/replies");
+const posts = require("./routes/posts");
 
 const app = express();
 
@@ -76,6 +79,9 @@ app.use(cors());
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/users", users);
 app.use("/api/v1/categories", categories);
+app.use("/api/v1/comments", comments);
+app.use("/api/v1/comments", replies);
+app.use("/api/v1/posts", posts);
 
 app.use(errorHandler);
 

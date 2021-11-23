@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -30,7 +31,7 @@ const UserSchema = new mongoose.Schema({
 
   role: {
     type: String,
-    enum: ["user", "publisher"],
+    enum: ["user", "admin"],
     default: "user",
   },
   password: {
@@ -46,6 +47,8 @@ const UserSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+UserSchema.plugin(uniqueValidator, { message: "{PATH} already exists." });
 
 // Encrypt password using bcrypt
 UserSchema.pre("save", async function (next) {
