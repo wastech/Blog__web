@@ -15,6 +15,11 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 // @access    Private/Admin
 exports.getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id);
+   if (!user) {
+     return next(
+       new ErrorResponse(`No User with that id of ${req.params.id}`)
+     );
+   }
 
   res.status(200).json({
     success: true,

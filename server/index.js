@@ -31,6 +31,7 @@ cloudinary.config({
 
 const auth = require("./routes/auth");
 const users = require("./routes/users");
+const categories = require("./routes/categories");
 
 const app = express();
 
@@ -74,6 +75,7 @@ app.use(cors());
 
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/users", users);
+app.use("/api/v1/categories", categories);
 
 app.use(errorHandler);
 
@@ -90,5 +92,5 @@ const server = app.listen(
 process.on("unhandledRejection", (err, promise) => {
   console.log(`Error: ${err.message}`.red);
   // Close server & exit process
-  // server.close(() => process.exit(1));
+  server.close(() => process.exit(1));
 });
