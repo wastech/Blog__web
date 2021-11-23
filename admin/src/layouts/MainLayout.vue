@@ -36,8 +36,40 @@
                 <q-item-label>posts</q-item-label>
               </q-item-section>
             </q-item>
+          </q-list>
+        </q-expansion-item>
 
+        <q-expansion-item icon="fas fa-object-group" label="Category">
+          <q-list class="q-pl-lg">
+            <q-item to="/-" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="post_add" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Create Category</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-expansion-item>
 
+        <q-expansion-item icon="far fa-user" label="profile">
+          <q-list class="q-pl-lg">
+            <q-item to="/-" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="post_add" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Setting</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item to="/" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <q-icon name="compost" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Users</q-item-label>
+              </q-item-section>
+            </q-item>
           </q-list>
         </q-expansion-item>
 
@@ -60,9 +92,9 @@ import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
   {
-    title: "Docs",
+    title: "logout",
 
-    icon: "school",
+    icon: "fas fa-sign-out-alt",
   },
 ];
 
