@@ -8,6 +8,7 @@ const routes = [
       { path: "create-post", component: () => import("pages/create-post.vue") },
       { path: "category", component: () => import("pages/category.vue") },
       { path: "setting", component: () => import("pages/setting.vue") },
+      { path: "users", component: () => import("pages/users.vue") },
     ],
   },
 
