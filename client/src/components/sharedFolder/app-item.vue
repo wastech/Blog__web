@@ -50,8 +50,31 @@
           class="q-mr-lg"
         />
 
-        <q-icon name="fas fa-share " size="sm" class="q-mr-xs"></q-icon>
-        <span>
+        <!-- <q-btn
+            class="q-ml-xs"
+            icon="search"
+            @click="show_filter = !show_filter"
+            flat
+          /> -->
+        <!-- <q-input
+            v-if="show_filter"
+            filled
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          /> -->
+
+        <q-btn
+          no-shadow
+          round
+          @mouseover="show_filter = true"
+          @mouseleave="show_filter = false"
+          class="q-mr-xs"
+          icon="fas fa-share"
+        />
+        <span v-if="show_filter">
           <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs"></q-icon>
           <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs"></q-icon>
           <q-icon
@@ -69,6 +92,11 @@
 <script>
 export default {
   props: ["item"],
+  data() {
+    return {
+      show_filter: false,
+    };
+  },
 };
 </script>
 
