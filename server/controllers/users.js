@@ -15,11 +15,9 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 // @access    Private/Admin
 exports.getUser = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-   if (!user) {
-     return next(
-       new ErrorResponse(`No User with that id of ${req.params.id}`)
-     );
-   }
+  if (!user) {
+    return next(new ErrorResponse(`No User with that id of ${req.params.id}`));
+  }
 
   res.status(200).json({
     success: true,
@@ -31,7 +29,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/auth/users
 // @access    Private/Admin
 exports.createUser = asyncHandler(async (req, res, next) => {
-  const user = await User.create(req.body);
+  const user = await User.create(...req.body);
 
   res.status(201).json({
     success: true,
@@ -43,7 +41,7 @@ exports.createUser = asyncHandler(async (req, res, next) => {
 // @route     PUT /api/v1/auth/users/:id
 // @access    Private/Admin
 exports.updateUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+  const user = await User.findByIdAndUpdate(req.params.id, ...req.body, {
     new: true,
     runValidators: true,
   });

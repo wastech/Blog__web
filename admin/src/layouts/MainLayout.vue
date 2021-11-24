@@ -54,7 +54,7 @@
 
         <q-expansion-item icon="far fa-user" label="profile">
           <q-list class="q-pl-lg">
-            <q-item to="/-" active-class="q-item-no-link-highlighting">
+            <q-item to="/setting" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
                 <q-icon name="post_add" />
               </q-item-section>
@@ -62,7 +62,7 @@
                 <q-item-label>Setting</q-item-label>
               </q-item-section>
             </q-item>
-            <q-item to="/" active-class="q-item-no-link-highlighting">
+            <q-item to="/users" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
                 <q-icon name="compost" />
               </q-item-section>

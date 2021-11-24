@@ -14,7 +14,7 @@
             <q-form class="q-gutter-sm">
               <q-input
                 filled
-                v-model="username"
+                v-model="name"
                 :rules="[(val) => !!val || 'Field is required']"
                 label="Username"
                 lazy-rules
@@ -37,21 +37,21 @@
               />
 
               <div>
-                <q-file
-                  outlined
-                  v-model="model"
-                  :rules="[(val) => !!val || 'Field is required']"
-                >
-                  <template v-slot:prepend>
-                    <q-icon name="fas fa-paperclip" />
-                  </template>
-                </q-file>
+                <div class="col-12 q-my-md">
+                  <input
+                    dark
+                    outlined
+                    type="file"
+                    ref="file"
+                    @change="onSelect()"
+                  />
+                </div>
 
                 <q-input
                   outlined
                   rows="5"
                   :rules="[(val) => !!val || 'Field is required']"
-                  v-model="body"
+                  v-model="description"
                   clearable
                   type="textarea"
                 />
@@ -61,6 +61,7 @@
                   type="submit"
                   class="full-width"
                   color="primary"
+                  v-on:click.prevent="validateInputs"
                 />
               </div>
             </q-form>
@@ -72,13 +73,52 @@
 </template>
 
 <script>
+import AuthenticationService from "../services/AuthenticationService";
 export default {
   data() {
     return {
-      username: "",
+      name: "",
+      file: "",
       password: "",
-      model: "",
+      email: "",
+      description: "",
     };
+  },
+  methods: {
+    validateInputs() {
+      this.signUp();
+    },
+    onSelect() {
+      this.file = this.$refs.file.files[0];
+    },
+    async signUp() {
+      try {
+        let formData = new FormData();
+        formData.append("avatar", this.file);
+        formData.append("email", this.email);
+        formData.append("name", this.name);
+        formData.append("password", this.password);
+        formData.append("description", this.description);
+        const response = await AuthenticationService.register(formData);
+        this.$q.notify({
+          type: "positive",
+          timeout: 2000,
+          position: "center",
+          message: "success",
+        });
+        this.$router.push({
+          name: "login",
+        });
+      } catch (error) {
+        this.$q.notify({
+          type: "negative",
+          multiLine: true,
+          timeout: 2000,
+          position: "center",
+          message: error.response.data.error,
+        });
+      }
+    },
   },
 };
 </script>

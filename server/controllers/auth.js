@@ -26,6 +26,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     name,
     email,
     password,
+    description,
     role,
     avatar: {
       public_id: result.public_id,
@@ -87,7 +88,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    data: user,
+    user,
   });
 });
 
@@ -95,19 +96,44 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @route     PUT /api/v1/auth/updatedetails
 // @access    Private
 exports.updateDetails = asyncHandler(async (req, res, next) => {
-  const fieldsToUpdate = {
+  // const fieldsToUpdate = {
+  //   name: req.body.name,
+  //   email: req.body.email,
+  // };
+
+  const newUserData = {
     name: req.body.name,
     email: req.body.email,
+    description: req.body.description,
   };
+  const file = req.files.avatar;
+  // Update avatar
+  if (file !== "") {
+    const user = await User.findById(req.user.id);
 
-  const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
+    const image_id = user.avatar.public_id;
+    const res = await cloudinary.v2.uploader.destroy(image_id);
+
+    const result = await cloudinary.v2.uploader.upload(file.tempFilePath, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserData.avatar = {
+      public_id: result.public_id,
+      url: result.secure_url,
+    };
+  }
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
+    useFindAndModify: false,
   });
-
   res.status(200).json({
     success: true,
-    data: user,
+    user,
   });
 });
 
@@ -116,7 +142,7 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 // @access    Private
 exports.updatePassword = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
-
+  console.log("req.body.currentPassword", user);
   // Check current password
   if (!(await user.matchPassword(req.body.currentPassword))) {
     return next(new ErrorResponse("Password is incorrect", 401));

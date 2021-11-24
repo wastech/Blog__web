@@ -34,6 +34,7 @@
                 <q-btn
                   label="Login"
                   type="submit"
+                  v-on:click.prevent="Submit()"
                   class="full-width"
                   color="primary"
                 />
@@ -47,12 +48,44 @@
 </template>
 
 <script>
+import AuthenticationService from "../services/AuthenticationService";
 export default {
   data() {
     return {
       email: "",
       password: "",
     };
+  },
+  methods: {
+    Submit() {
+      this.login();
+    },
+    async login() {
+      try {
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password,
+        });
+        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user);
+        this.$q.notify({
+          type: "positive",
+          timeout: 1000,
+          position: "center",
+          message: "success",
+        });
+        this.$router.push({
+          name: "dashboard",
+        });
+      } catch (error) {
+        this.$q.notify({
+          type: "negative",
+          timeout: 1000,
+          position: "center",
+          message: error.response.data.error,
+        });
+      }
+    },
   },
 };
 </script>

@@ -7,22 +7,20 @@
             <div class="text-h6">Edit Profile</div>
             <div class="text-subtitle2">Complete your profile</div>
           </q-card-section>
+
           <q-card-section class="q-pa-sm">
             <q-list class="row">
               <q-item class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <q-item-section side>
-                  <q-avatar size="100px">
-                    <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-                  </q-avatar>
-                </q-item-section>
-                <q-item-section>
-                  <q-btn
-                    label="Add Photo"
-                    class="text-capitalize"
-                    rounded
-                    color="info"
-                    style="max-width: 120px"
-                  ></q-btn>
+                  <div class="col-12 q-my-md">
+                    <input
+                      dark
+                      outlined
+                      type="file"
+                      ref="file"
+                      @change="onSelect()"
+                    />
+                  </div>
                 </q-item-section>
               </q-item>
 
@@ -32,7 +30,7 @@
                     dark
                     color="white"
                     dense
-                    v-model="user_details.user_name"
+                    v-model="name"
                     label="User Name"
                   />
                 </q-item-section>
@@ -43,7 +41,7 @@
                     dark
                     color="white"
                     dense
-                    v-model="user_details.email"
+                    v-model="email"
                     label="Email Address"
                   />
                 </q-item-section>
@@ -56,7 +54,7 @@
                     color="white"
                     type="textarea"
                     dense
-                    v-model="user_details.about"
+                    v-model="description"
                     label="About"
                   />
                 </q-item-section>
@@ -64,28 +62,28 @@
             </q-list>
           </q-card-section>
           <q-card-actions align="right">
-            <q-btn class="text-capitalize bg-info text-white"
+            <q-btn
+              class="text-capitalize bg-info text-white"
+              @click="onSubmit"
+              type="submit"
               >Update User Info</q-btn
             >
           </q-card-actions>
         </q-card>
       </div>
+
       <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
         <q-card class="card-bg text-white">
           <q-card-section class="text-center bg-transparent">
-            <q-avatar size="100px" class="shadow-10">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            <q-avatar size="100px" class="shadow-10" v-if="file">
+              <img :src="file.url" />
             </q-avatar>
             <!-- <div class="text-subtitle2 q-mt-lg">by Pratik Patel</div> -->
-            <div class="text-h6 q-mt-md">Pratik Patel</div>
+            <div class="text-h6 q-mt-md">{{ name }}</div>
           </q-card-section>
           <q-card-section>
             <div class="text-body2 text-justify">
-              My name is Pratik Patel (also known as @pratik227). I noticed
-              myself pulling into programming since 2013, and then determined
-              myself to become a skilled and knowledgeable programmer. My
-              passion for my programming increases as I started working for
-              Incentius (where I am currently working in).
+              {{ description }}
             </div>
           </q-card-section>
         </q-card>
@@ -107,9 +105,9 @@
                   dark
                   dense
                   outlined
+                  v-model="formData.currentPassword"
                   color="white"
                   round
-                  v-model="password_dict.current_password"
                   label="Current Password"
                 />
               </q-item-section>
@@ -126,12 +124,12 @@
                   outlined
                   color="white"
                   round
-                  v-model="password_dict.new_password"
+                  v-model="formData.newPassword"
                   label="New Password"
                 />
               </q-item-section>
             </q-item>
-            <q-item class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <!-- <q-item class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
               <q-item-section> Confirm New Password </q-item-section>
             </q-item>
             <q-item class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -143,14 +141,16 @@
                   outlined
                   round
                   color="white"
-                  v-model="password_dict.confirm_new_password"
                   label="Confirm New Password"
                 />
               </q-item-section>
-            </q-item>
+            </q-item> -->
           </q-card-section>
           <q-card-actions align="right">
-            <q-btn class="text-capitalize bg-info text-white"
+            <q-btn
+              class="text-capitalize bg-info text-white"
+              type="submit"
+              @click="updatePass"
               >Change Password</q-btn
             >
           </q-card-actions>
@@ -161,16 +161,90 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "UserProfile",
-  setup() {
+import AuthenticationService from "../services/AuthenticationService";
+export default {
+  data() {
     return {
-      user_details: {},
-      password_dict: {},
+      name: "",
+      email: "",
+      description: "",
+      file: "",
+      formData: {
+        currentPassword: "",
+        newPassword: "",
+      },
     };
   },
-});
+  methods: {
+    onSelect() {
+      this.file = this.$refs.file.files[0];
+    },
+    async onSubmit() {
+      try {
+        let formData = new FormData();
+        formData.append("avatar", this.file);
+        formData.append("email", this.email);
+        formData.append("name", this.name);
+        formData.append("description", this.description);
+        await AuthenticationService.update(formData).then((response) => {
+          this.$q.notify({
+            type: "positive",
+            timeout: 2000,
+            position: "center",
+            message: "success",
+          });
+          this.getPosts();
+        });
+      } catch (error) {
+        this.$q.notify({
+          type: "negative",
+          multiLine: true,
+          timeout: 2000,
+          position: "center",
+          message: error.response.data.error,
+        });
+        console.log(error.response.data);
+      }
+    },
+    async updatePass() {
+      try {
+        const response = await AuthenticationService.updatepass({
+          currentPassword: this.formData.currentPassword,
+          newPassword: this.formData.newPassword,
+        });
+        this.$q.notify({
+          type: "positive",
+          timeout: 1000,
+          position: "center",
+          message: "success",
+        });
+      } catch (error) {
+        this.$q.notify({
+          type: "negative",
+          timeout: 1000,
+          position: "center",
+          message: error.response.data.error,
+        });
+      }
+    },
+    async getPosts() {
+      try {
+        await AuthenticationService.user().then((response) => {
+          this.file = response.data.user.avatar;
+          this.name = response.data.user.name;
+          this.email = response.data.user.email;
+          this.description = response.data.user.description;
+          console.log("this is respons", response.data.user);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async mounted() {
+    this.getPosts();
+  },
+};
 </script>
 
 <style scoped>
