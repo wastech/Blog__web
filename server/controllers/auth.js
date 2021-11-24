@@ -19,7 +19,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     resource_type: "auto",
   });
 
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, description } = req.body;
 
   // Create user
   const user = await User.create({

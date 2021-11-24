@@ -20,7 +20,7 @@
         <q-item-label header> Dashboard </q-item-label>
         <q-expansion-item icon="pages" label="Posts">
           <q-list class="q-pl-lg">
-            <q-item to="/-" active-class="q-item-no-link-highlighting">
+            <q-item to="/create-post" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
                 <q-icon name="post_add" />
               </q-item-section>
@@ -41,7 +41,7 @@
 
         <q-expansion-item icon="fas fa-object-group" label="Category">
           <q-list class="q-pl-lg">
-            <q-item to="/-" active-class="q-item-no-link-highlighting">
+            <q-item to="/category" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
                 <q-icon name="post_add" />
               </q-item-section>

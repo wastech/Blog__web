@@ -30,7 +30,7 @@ exports.getCategory = asyncHandler(async (req, res, next) => {
 exports.createCategory = asyncHandler(async (req, res, next) => {
   const category = await Category.create({
     ...req.body,
-    // userId: req.user.id,
+    userId: req.user.id,
   });
 
   return res.status(200).json({ sucess: true, data: category });
