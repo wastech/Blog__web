@@ -1,7 +1,7 @@
 <template>
   <div class="q-my-sm flex flex-center">
     <q-form
-      @submit.prevent="onUpload"
+      @submit.prevent="onUpdate"
       v-bind:style="$q.screen.lt.sm ? { width: '80%' } : { width: '70%' }"
     >
       <div class="row q-col-gutter-sm">
@@ -20,7 +20,7 @@
             <input dark outlined type="file" ref="file" @change="onSelect()" />
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            {{options._id}}
+            {{ options._id }}
             <q-select
               filled
               v-model="categoryId"
@@ -28,7 +28,7 @@
               :options="options"
               emit-value
               map-options
-             option-value="_id"
+              option-value="_id"
               option-label="title"
               label="select category"
             />
@@ -163,11 +163,12 @@ export default {
       categoryId: "",
       options: [],
       file: "",
+      id: this.$route.params.id,
       optionsT: ["People", "Design", "photograph", "Girl", "Work", "city"],
     };
   },
   methods: {
-    async getPosts() {
+     async getPosts() {
       try {
         await categoriesService.cate().then((response) => {
           this.options = response.data.data;
@@ -177,10 +178,22 @@ export default {
         console.log(err.response);
       }
     },
+    async getPost() {
+      try {
+        await postService.showpost(this.id).then((response) => {
+          this.title = response.data.post.title;
+          this.description = response.data.post.description;
+          this.categoryId = response.data.post.categoryId.title;
+          console.log(response.post);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
     onSelect() {
       this.file = this.$refs.file.files[0];
     },
-    async onUpload() {
+    async onUpdate() {
       try {
         let formData = new FormData();
         formData.append("imageUrl", this.file);
@@ -188,7 +201,7 @@ export default {
         formData.append("description", this.description);
         formData.append("categoryId", this.categoryId);
         formData.append("tags", this.tags);
-        await postService.createPost(formData).then((response) => {
+        await postService.updateData(this.id, formData).then((response) => {
           this.$q.notify({
             type: "positive",
             timeout: 1000,
@@ -207,7 +220,8 @@ export default {
     },
   },
   async mounted() {
-    this.getPosts();
+    this.getPost();
+    this.getPosts()
   },
 };
 </script>

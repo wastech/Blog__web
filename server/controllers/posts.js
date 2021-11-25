@@ -1,6 +1,6 @@
 const Post = require("../models/Post");
 const ErrorResponse = require("../utils/errorResponse");
-const asyncHandler = require("../middleware/async");;
+const asyncHandler = require("../middleware/async");
 const cloudinary = require("cloudinary");
 
 // Create new product   =>   /api/v1/admin/post/new
@@ -10,15 +10,17 @@ exports.addPost = asyncHandler(async (req, res, next) => {
     folder: "post",
     resource_type: "auto",
   });
-
+  // Add user to req,body
+  // req.body.user = req.user.id;
   const post = await Post.create({
     ...req.body,
-    // user: req.user.id,
+    userId: req.user.id,
     imageUrl: {
       public_id: result.public_id,
       url: result.secure_url,
     },
   });
+  console.log("this is post", post);
   res.status(200).json({ data: post });
 });
 
@@ -40,8 +42,8 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 // Get single post details   =>   /api/v1/post/:id
 exports.getPost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id)
-    // .populate("user")
-    // .populate("category");
+    .populate("userId")
+    .populate("categoryId");
 
   if (!post) {
     return next(new ErrorResponse("post not found", 404));
@@ -52,8 +54,6 @@ exports.getPost = asyncHandler(async (req, res, next) => {
     post,
   });
 });
-
-
 
 // Update Product   =>   /api/v1/admin/product/:id
 // Update Product   =>   /api/v1/admin/product/:id
@@ -129,4 +129,3 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     message: "post is deleted.",
   });
 });
-

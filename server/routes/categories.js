@@ -16,10 +16,7 @@ const { protect, authorize } = require("../middleware/auth");
 
 router.use(protect);
 
-router
-  .route("/")
-  .get(advancedResults(Category), getCategories)
-  .post(authorize("admin"), createCategory);
+router.route("/").get(getCategories).post(authorize("admin"), createCategory);
 
 router
   .route("/:id")

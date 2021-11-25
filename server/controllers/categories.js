@@ -6,7 +6,10 @@ const Category = require("../models/Category");
 // @route   GET /api/v1/categories
 // @access  Private/Admin
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  res.status(200).json(res.advancedResults);
+  let categories = await Category.find({}).populate("userId", "name").exec();
+  res.status(200).json({
+    data: categories,
+  });
 });
 
 // @desc    Get single category

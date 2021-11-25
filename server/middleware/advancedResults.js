@@ -20,7 +20,10 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   );
 
   // Finding resource
-  query = model.find(JSON.parse(queryStr)).populate("userId","name" );
+  query = model
+    .find(JSON.parse(queryStr))
+    .populate("userId", "name")
+    .populate("categoryId", "title");
 
   // Select Fields
   if (req.query.select) {

@@ -28,11 +28,7 @@ const PostSchema = new Schema(
       type: Number,
       default: 0,
     },
-    tags: {
-      type: String,
-      enum: ["draft", "private", "public"],
-      default: "draft",
-    },
+    tags: [String],
     categoryId: {
       type: mongoose.Schema.ObjectId,
       ref: "Category",
@@ -45,8 +41,5 @@ const PostSchema = new Schema(
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
 );
-
-
-
 
 module.exports = mongoose.model("Post", PostSchema);
