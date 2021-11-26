@@ -63,42 +63,47 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
   if (!post) {
     return next(new ErrorHandler("post not found", 404));
   }
+  let imageresult = "";
+  if (req.files) {
+    if (!post.imageUrl[0].public_id) {
+      imageresult = await cloudinary.v2.uploader.upload(
+        req.files.imageUrl.tempFilePath,
+        {
+          folder: "post",
+        },
+        (error, result) => {
+          console.log(error);
+        }
+      );
+    } else {
+      await cloudinary.v2.uploader.destroy(post.imageUrl);
 
-  let images = [];
-  if (typeof req.body.imageUrl === "string") {
-    images.push(req.body.imageUrl);
-  } else {
-    images = req.body.imageUrl;
-  }
-
-  if (images !== undefined) {
-    // Deleting images associated with the product
-    for (let i = 0; i < post.imageUrl.length; i++) {
-      const result = await cloudinary.v2.uploader.destroy(
-        post.imageUrl[i].public_id
+      imageresult = await cloudinary.v2.uploader.upload(
+        req.files.imageUrl.tempFilePath,
+        {
+          folder: "post",
+        },
+        (error, result) => {
+          console.log(error);
+        }
       );
     }
-
-    let imagesLinks = [];
-
-    for (let i = 0; i < imageUrl.length; i++) {
-      const result = await cloudinary.v2.uploader.upload(imageUrl[i], {
-        folder: "products",
-      });
-
-      imagesLinks.push({
-        public_id: result.public_id,
-        url: result.secure_url,
-      });
-    }
-
-    req.body.imageUrl = imagesLinks;
+    req.body.imageUrl = {
+      url: imageresult.secure_url,
+      public_id: imageresult.public_id,
+    };
   }
-
-  post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
+  const updated = await Post.findByIdAndUpdate(
+    {
+      _id: req.params.id,
+    },
+    {
+      $set: req.body,
+    },
+    { new: true }
+  );
+  res.status(200).json({
+    message: "Updated successfully",
   });
 
   res.status(200).json({

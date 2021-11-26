@@ -201,6 +201,7 @@ export default {
         formData.append("description", this.description);
         formData.append("categoryId", this.categoryId);
         formData.append("tags", this.tags);
+        console.log(formData);
         await postService.updateData(this.id, formData).then((response) => {
           this.$q.notify({
             type: "positive",
