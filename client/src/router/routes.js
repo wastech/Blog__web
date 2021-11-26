@@ -5,12 +5,6 @@ const routes = [
   },
 
   {
-    path: "/single",
-    name: "single",
-    component: () => import("pages/detail-page.vue"),
-  },
-
-  {
     path: "/category",
     name: "category",
     component: () => import("pages/category.vue"),
@@ -35,6 +29,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: () => import("pages/about.vue"),
+  },
+  {
+    path: "/single/:id",
+    name: "single",
+    component: () => import("pages/detail-page.vue"),
   },
 
   // Always leave this as last one,

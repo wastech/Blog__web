@@ -139,6 +139,7 @@ export default {
       show_filter: false,
       left: false,
       tab: "",
+      text: "",
       icons: [
         { iconName: "fab fa-facebook-f" },
         { iconName: "fab fa-twitter" },

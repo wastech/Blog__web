@@ -65,11 +65,12 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
   }
   let imageresult = "";
   if (req.files) {
-    if (!post.imageUrl[0].public_id) {
+    if (!post.imageUrl) {
       imageresult = await cloudinary.v2.uploader.upload(
         req.files.imageUrl.tempFilePath,
         {
           folder: "post",
+          resource_type: "auto",
         },
         (error, result) => {
           console.log(error);
@@ -82,6 +83,7 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
         req.files.imageUrl.tempFilePath,
         {
           folder: "post",
+          resource_type: "auto",
         },
         (error, result) => {
           console.log(error);

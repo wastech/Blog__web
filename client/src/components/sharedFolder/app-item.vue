@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <div class="image">
-      <img :src="item.image" alt="" />
+    <div class="image" v-if="item.imageUrl">
+      <img :src="item.imageUrl[0].url" alt=""   v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '50vh' }" />
     </div>
     <div class="text">
       <div class="title text-left text-dark q-mt-sm q-mb-none">
@@ -15,19 +15,19 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-        <span class="q-mr-md"
-          >In <a href="">{{ item.category }}</a>
+        <span class="q-mr-md" v-if="item.categoryId"
+          >In <a href="">{{ item.categoryId.title }}</a>
         </span>
-        <span class="q-mr-md"
-          >Tags <a href="">{{ item.tags }}</a>
+        <span class="q-mr-md" v-for="tag in tags" :key="tag"
+          >Tags <a href="">{{ tag}}</a>
         </span>
         <span class="q-mr-md">{{ item.createdAt }}</span>
         <span class="q-mr-md"><a href="">2 comments</a> </span>
-        <span
-          ><img :src="item.authorImage" alt="" class="avatar q-mr-md"
+        <span v-if="item.userId"
+          ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
         /></span>
-        <span class="q-mr-md text-capitalize"
-          ><a href="">{{ item.name }}</a>
+        <span class="q-mr-md text-capitalize" v-if="item.userId"
+          ><a href="">{{ item.userId.name }}</a>
         </span>
       </div>
       <!-- icon section ends here -->
@@ -103,9 +103,9 @@ export default {
 <style scoped>
 .image > img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 20px;
   object-fit: cover;
-  height: auto;
+
 }
 .text-h3 {
   font-size: 23px;

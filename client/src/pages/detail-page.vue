@@ -1,8 +1,7 @@
 <template>
   <div class="main q-pa-md">
-    <div v-for="item in items" :key="item">
-      <app-item :item="item" />
-    </div>
+    <app-item :item="item" />
+
     <app-author />
     <related-post />
     <!-- <app-comment /> -->
@@ -279,6 +278,7 @@
 </template>
 
 <script>
+import postService from "../services/postService";
 import AppAuthor from "../components/app-author.vue";
 // import AppComment from "../components/app-comment.vue";
 import RelatedPost from "../components/related-post.vue";
@@ -290,8 +290,9 @@ export default {
   name: "PageIndex",
   data() {
     return {
-      current: 3,
+      // current: 3,
       show: false,
+      id: this.$route.params.id,
       show1: false,
       comments: [
         {
@@ -302,21 +303,7 @@ export default {
           body: " The names John Doe is used as placeholder names for a party whostrue identity is unknown or must be withheld in a legal action,case, or discussion. The names are also used to refer to a corpse.",
         },
       ],
-      items: [
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/cheerful-loving-couple-bakers-drinking-coffee-PCAVA6B-2.jpg",
-          title: "Loft Office With Vintage Decor For Creative Working",
-          description:
-            " It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offerin  similar services — on the surface, at least. Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offerin  similar services — on the surface, at least. Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks a",
-          category: "images post",
-          tags: "design",
-          createdAt: "May 17, 2015",
-          authorImage:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author-50x50.jpg",
-          name: "aremu aremu",
-        },
-      ],
+      item: {},
     };
   },
   methods: {
@@ -327,6 +314,19 @@ export default {
         this.show = false;
       }
     },
+    async getPost() {
+      try {
+        await postService.showpost(this.id).then((response) => {
+          this.item = response.data.post;
+          console.log(this.item);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+  async mounted() {
+    this.getPost();
   },
 };
 </script>
