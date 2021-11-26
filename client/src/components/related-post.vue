@@ -53,20 +53,6 @@ export default {
       deep: true,
     },
   },
-  // methods: {
-  //   async getPosts() {
-  //     try {
-  //       await postService.getPosts().then((response) => {
-  //         this.items = response.data.data;
-  //       });
-  //     } catch (err) {
-  //       console.log(err.response);
-  //     }
-  //   },
-  // },
-  // async mounted() {
-  //   this.getPosts();
-  // },
 };
 </script>
 >
@@ -83,7 +69,5 @@ img {
   font-size: 15px;
   line-height: 27px;
   word-break: break-word;
-}
-.text-h3 {
 }
 </style>
