@@ -42,10 +42,7 @@ exports.createComment = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`No post with id of ${req.body.postId}`, 404)
     );
   }
-  const comment = await Comment.create({
-    ...req.body,
-    
-  });
+  const comment = await Comment.create(req.body);
 
   return res.status(200).json({ sucess: true, data: comment });
 });

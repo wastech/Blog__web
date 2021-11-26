@@ -37,18 +37,11 @@ export default {
   watch: {
     $props: {
       handler: async function (newProps) {
-        // const response = await axios.get(
-        //   `https://real-est.herokuapp.com/api/related/${newProps.category._id}`
-        // );
-        // this.items = response.data.property;
-        console.log("newProps.categoryId._id", newProps.categoryId._id);
         await postService
           .getCategories(newProps.categoryId._id)
           .then((response) => {
             this.items = response.data.categories;
-            console.log("this is category: ", response.data.categories);
           });
-        //console.log("this is respones", this.items);
       },
       deep: true,
     },

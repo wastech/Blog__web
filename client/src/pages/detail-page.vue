@@ -15,7 +15,10 @@
       >
         <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
           <div class="image">
-            <img :src="comment.image" alt="" />
+            <img
+              src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author.jpg"
+              alt=""
+            />
           </div>
         </div>
         <div
@@ -41,7 +44,7 @@
             </div>
 
             <div class="text-body2">
-              {{ comment.body }}
+              {{ comment.text }}
             </div>
           </div>
         </div>
@@ -49,21 +52,24 @@
         <!--  reply start  here -->
         <div
           class="row q-mt-lg q-ml-xl"
-          v-for="comment in comments"
-          :key="comment"
+          v-for="reply in replies"
+          :key="reply"
         >
           <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
             <div class="image">
-              <img :src="comment.image" alt="" />
+              <img
+                src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author.jpg"
+                alt=""
+              />
             </div>
           </div>
           <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 col-xl-10 q-ml-sm">
             <div class="text">
               <div class="text-h4 text-weight-bold">
-                <a href="">{{ comment.name }} </a> <q-icon name="far fa-edit" />
+                <a href="">{{ reply.name }} </a> <q-icon name="far fa-edit" />
               </div>
               <div class="text-caption" style="color: #acabab">
-                {{ comment.createdAt }} -
+                {{ reply.createdAt }} -
                 <input
                   type="checkbox"
                   class="whitelist"
@@ -73,7 +79,7 @@
                 <span class="text-weight-bold"> Reply</span>
               </div>
               <div class="text-body2">
-                {{ comment.body }}
+                {{ reply.text }}
               </div>
             </div>
           </div>
@@ -107,7 +113,7 @@
                       col-lg-4 col-xl-4
                     "
                   >
-                    <q-input outlined dense v-model="text" placeholder="name" />
+                    <q-input outlined dense placeholder="name" />
                   </div>
 
                   <div
@@ -235,12 +241,21 @@
           outlined
           rows="10"
           class="text__area"
+          v-model="text"
           clearable
+          :rules="[(val) => !!val || 'Field is required']"
           type="textarea"
         />
         <div class="row q-my-md q-col-gutter-sm">
           <div class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4">
-            <q-input outlined dense v-model="text" placeholder="name" />
+            <q-input
+              outlined
+              dense
+              type="text"
+              v-model="name"
+              :rules="[(val) => !!val || 'Field is required']"
+              placeholder="name"
+            />
           </div>
 
           <div class="col-xs-12 col-sm-4 col-md-4 q-my-xs col-lg-4 col-xl-4">
@@ -248,6 +263,7 @@
               v-model="email"
               outlined
               dense
+              :rules="[(val) => !!val || 'Field is required']"
               type="email"
               placeholder="email"
             />
@@ -258,6 +274,7 @@
               dense
               outlined
               type="url"
+              :rules="[(val) => !!val || 'Field is required']"
               placeholder="website"
             />
           </div>
@@ -267,7 +284,9 @@
           outline
           size="md"
           rounded
+          type="submit"
           no-caps
+          @click.prevent="onSubmit()"
           color="grey-13"
           label="Post Comment"
         />
@@ -279,6 +298,7 @@
 
 <script>
 import postService from "../services/postService";
+import commentService from "../services/commentService";
 import AppAuthor from "../components/app-author.vue";
 // import AppComment from "../components/app-comment.vue";
 import RelatedPost from "../components/related-post.vue";
@@ -294,15 +314,11 @@ export default {
       show: false,
       id: this.$route.params.id,
       show1: false,
-      comments: [
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author.jpg",
-          name: "ahmad",
-          createdAt: "May 22, 2015 at 7:49 am",
-          body: " The names John Doe is used as placeholder names for a party whostrue identity is unknown or must be withheld in a legal action,case, or discussion. The names are also used to refer to a corpse.",
-        },
-      ],
+      text: "",
+      name: "",
+      url: "",
+      email: "",
+      comments: [],
       item: {},
     };
   },
@@ -323,9 +339,53 @@ export default {
         console.log(err);
       }
     },
+    async getComments() {
+      try {
+        await commentService.getComments(this.id).then((response) => {
+          this.comments = response.data.data;
+          console.log("this is comments", this.comments);
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async onSubmit() {
+      const comment = {
+        postId: this.id,
+        text: this.text,
+        name: this.name,
+        url: this.url,
+        email: this.email,
+      };
+      try {
+        await commentService.postComment(comment).then((response) => {
+          this.getComments();
+
+          this.$q.notify({
+            type: "positive",
+            timeout: 1000,
+            position: "center",
+            message: "Comment sent",
+          });
+        });
+      } catch (error) {
+        console.log("error", error);
+        this.$q.notify({
+          type: "negative",
+          timeout: 1000,
+          position: "center",
+          message: "All Fields required and must be at least 4 characters long",
+        });
+      }
+      this.text = "";
+      this.name = "";
+      this.email = "";
+      this.url = "";
+    },
   },
   async mounted() {
     this.getPost();
+    this.getComments();
   },
 };
 </script>

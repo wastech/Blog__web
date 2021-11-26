@@ -63,9 +63,9 @@ import moment from "moment";
 export default {
   props: ["item"],
   data() {
-    // return {
-    //   show_filter: false,
-    // };
+    return {
+      // show_filter: false,
+    };
   },
   created: function () {
     this.moment = moment;

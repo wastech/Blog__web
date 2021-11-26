@@ -80,7 +80,7 @@ app.use("/api/v1/auth", auth);
 app.use("/api/v1/users", users);
 app.use("/api/v1/categories", categories);
 app.use("/api/v1/comments", comments);
-app.use("/api/v1/comments", replies);
+app.use("/api/v1/replies", replies);
 app.use("/api/v1/posts", posts);
 
 app.use(errorHandler);

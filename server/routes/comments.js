@@ -18,6 +18,6 @@ router
 
 router.route("/:id").put(protect, updateComment).delete(protect, deleteComment);
 
-router.route("/:postId/posts").get(getCommentByPostId);
+router.route("/:postId/comments").get(getCommentByPostId);
 
 module.exports = router;

@@ -24,7 +24,7 @@ const CommentSchema = new Schema(
     url: {
       type: String,
       required: [true, "Please add an url"],
-      unique: true,
+      // unique: true,
       match: [
         /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/,
         "Please add a valid URL",
