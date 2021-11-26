@@ -7,8 +7,8 @@
         v-for="item in items"
         :key="item"
       >
-        <div class="image">
-          <img :src="item.image" alt="" />
+        <div class="image" v-if="item.imageUrl">
+          <img :src="item.imageUrl[0].url" alt="" />
         </div>
         <div class="text q-mb-xl">
           <div class="text-h4 text-bold">{{ item.title }}</div>
@@ -20,35 +20,61 @@
 </template>
 
 <script>
+import moment from "moment";
+import postService from "../services/postService";
+
 export default {
+  name: "PageIndex",
+  props: ["categoryId"],
   data() {
     return {
-      items: [
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/yellow-and-gray-industrial-office-PFDQ5CR-1-455x310.jpg",
-          title: "Cosy Bright Office In Yellow And Grey Colors",
-        },
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/black-woman-smiling-with-hands-in-hair-PMCFL93-1-455x310.jpg",
-          title: "Beautiful Woman Smiling With Hands In Hair",
-        },
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Blue-Enterior-Design-455x310.jpg",
-          title: "My Adventure in Alps, One of The Heighest Mountains!",
-        },
-      ],
+      items: [],
     };
   },
+  created: function () {
+    this.moment = moment;
+  },
+  watch: {
+    $props: {
+      handler: async function (newProps) {
+        // const response = await axios.get(
+        //   `https://real-est.herokuapp.com/api/related/${newProps.category._id}`
+        // );
+        // this.items = response.data.property;
+        console.log("newProps.categoryId._id", newProps.categoryId._id);
+        await postService
+          .getCategories(newProps.categoryId._id)
+          .then((response) => {
+            this.items = response.data.categories;
+            console.log("this is category: ", response.data.categories);
+          });
+        //console.log("this is respones", this.items);
+      },
+      deep: true,
+    },
+  },
+  // methods: {
+  //   async getPosts() {
+  //     try {
+  //       await postService.getPosts().then((response) => {
+  //         this.items = response.data.data;
+  //       });
+  //     } catch (err) {
+  //       console.log(err.response);
+  //     }
+  //   },
+  // },
+  // async mounted() {
+  //   this.getPosts();
+  // },
 };
 </script>
+>
 
 <style scoped>
 img {
   width: 100%;
-  height: auto;
+  height: 23vh;
   object-fit: cover;
   border-radius: 10px;
 }

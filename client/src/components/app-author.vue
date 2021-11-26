@@ -2,22 +2,20 @@
   <div>
     <div class="row q-pa-md">
       <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 col-xl-2">
-        <div class="image">
-          <img
-            src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author.jpg"
-            alt=""
-          />
+        <div class="image" v-if="item.userId">
+          <img :src="item.userId.avatar.url" alt="" />
         </div>
       </div>
-      <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 col-xl-10">
+      <div
+        class="col-xs-8 col-sm-9 col-md-10 col-lg-10 col-xl-10"
+        v-if="item.userId"
+      >
         <div class="text">
           <div class="text-h4 q-my-xs text-weight-bold">
-            <a href="">John Doe</a>
+            <a href="">{{ item.userId.name }}</a>
           </div>
           <div class="text-body2">
-            The names "John Doe" is used as placeholder names for a party whose
-            true identity is unknown or must be withheld in a legal action,
-            case, or discussion. The names are also used to refer to a corpse.
+            {{ item.userId.description }}
           </div>
         </div>
       </div>
@@ -28,7 +26,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props:["item"]
+};
 </script>
 
 <style scoped>

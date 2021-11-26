@@ -31,7 +31,7 @@
           </span>
 
           <span class="q-mr-md">Tags <a href="" v-html="item.tags"></a> </span>
-          <span class="q-mr-md">{{ item.createdAt }}</span>
+          <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
           <span class="q-mr-md"><a href="">2 comments</a> </span>
           <span
             ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import moment from "moment"
 // import appHeader from "../components/app-header.vue";
 import postService from "../services/postService";
 
@@ -108,13 +109,14 @@ export default {
       items: [],
     };
   },
+    created: function() {
+    this.moment = moment;
+  },
   methods: {
     async getPosts() {
       try {
         await postService.getPosts().then((response) => {
           this.items = response.data.data;
-          this.tags = response.data.data.tags;
-          console.log("this is tags", response.data.data);
         });
       } catch (err) {
         console.log(err.response);

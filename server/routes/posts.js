@@ -5,6 +5,7 @@ const {
   addPost,
   updatePost,
   deletePost,
+  getCategories,
 } = require("../controllers/posts");
 
 const Post = require("../models/Post");
@@ -24,5 +25,7 @@ router
   .get(getPost)
   .put(protect, authorize("admin"), updatePost)
   .delete(protect, authorize("admin"), deletePost);
+
+  router.route("/category/:categoryId").get(getCategories);
 
 module.exports = router;

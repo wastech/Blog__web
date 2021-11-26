@@ -2,8 +2,8 @@
   <div class="main q-pa-md">
     <app-item :item="item" />
 
-    <app-author />
-    <related-post />
+    <app-author :item="item" />
+    <related-post :categoryId="item.categoryId" />
     <!-- <app-comment /> -->
     <div>
       <div class="text-h6 q-my-md text-weight-bold">5 comments</div>
@@ -318,7 +318,6 @@ export default {
       try {
         await postService.showpost(this.id).then((response) => {
           this.item = response.data.post;
-          console.log(this.item);
         });
       } catch (err) {
         console.log(err);

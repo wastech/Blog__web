@@ -16,6 +16,9 @@ export default {
   showpost(postId) {
     return Api().get(`posts/${postId}`);
   },
+  getCategories(categoryId) {
+    return Api().get(`posts/category/${categoryId}`);
+  },
 
   // deleteData(ID) {
   //   return Api().delete(`posts/${ID}`);

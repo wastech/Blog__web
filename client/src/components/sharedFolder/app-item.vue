@@ -1,7 +1,11 @@
 <template>
   <div class="main">
     <div class="image" v-if="item.imageUrl">
-      <img :src="item.imageUrl[0].url" alt=""   v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '50vh' }" />
+      <img
+        :src="item.imageUrl[0].url"
+        alt=""
+        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '50vh' }"
+      />
     </div>
     <div class="text">
       <div class="title text-left text-dark q-mt-sm q-mb-none">
@@ -18,10 +22,8 @@
         <span class="q-mr-md" v-if="item.categoryId"
           >In <a href="">{{ item.categoryId.title }}</a>
         </span>
-        <span class="q-mr-md" v-for="tag in tags" :key="tag"
-          >Tags <a href="">{{ tag}}</a>
-        </span>
-        <span class="q-mr-md">{{ item.createdAt }}</span>
+        <span class="q-mr-md">Tags <a href="" v-html="item.tags"></a> </span>
+        <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
         <span class="q-mr-md"><a href="">2 comments</a> </span>
         <span v-if="item.userId"
           ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
@@ -40,41 +42,8 @@
       </div>
 
       <div class="button q-mb-xl">
-        <q-btn
-          outline
-          rounded
-          color="orange-6"
-          text-color="primary"
-          label="Continue Reading"
-          no-caps
-          class="q-mr-lg"
-        />
-
-        <!-- <q-btn
-            class="q-ml-xs"
-            icon="search"
-            @click="show_filter = !show_filter"
-            flat
-          /> -->
-        <!-- <q-input
-            v-if="show_filter"
-            filled
-            borderless
-            dense
-            debounce="300"
-            v-model="filter"
-            placeholder="Search"
-          /> -->
-
-        <q-btn
-          no-shadow
-          round
-          @mouseover="show_filter = true"
-          @mouseleave="show_filter = false"
-          class="q-mr-xs"
-          icon="fas fa-share"
-        />
-        <span v-if="show_filter">
+        <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
+        <span>
           <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs"></q-icon>
           <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs"></q-icon>
           <q-icon
@@ -90,12 +59,16 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   props: ["item"],
   data() {
-    return {
-      show_filter: false,
-    };
+    // return {
+    //   show_filter: false,
+    // };
+  },
+  created: function () {
+    this.moment = moment;
   },
 };
 </script>
@@ -105,7 +78,6 @@ export default {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
-
 }
 .text-h3 {
   font-size: 23px;
