@@ -38,7 +38,7 @@ export default {
     $props: {
       handler: async function (newProps) {
         await postService
-          .getCategories(newProps.categoryId._id)
+          .getRelated(newProps.categoryId._id)
           .then((response) => {
             this.items = response.data.categories;
           });
@@ -48,7 +48,7 @@ export default {
   },
 };
 </script>
->
+
 
 <style scoped>
 img {

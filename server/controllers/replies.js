@@ -11,6 +11,19 @@ exports.getReplies = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 });
 
+exports.getReplyByCommentId = asyncHandler(async (req, res, next) => {
+  const reply = await Reply.find({ commentId: req.params.commentId })
+    // .populate("replies")
+    .sort("-createdAt");
+
+  if (!reply) {
+    return next(
+      new ErrorResponse(`No comment with that Post id of ${req.params.postId}`)
+    );
+  }
+
+  res.status(200).json({ sucess: true, data: reply });
+});
 // @desc    Create reply
 // @route   POST /api/v1/replies/
 // @access  Private
@@ -24,10 +37,9 @@ exports.createReply = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`No comment with id of ${req.body.commentId}`, 404)
     );
   }
-  const reply = await Reply.create({
-    ...req.body,
-  });
 
+  const reply = await Reply.create(req.body);
+  console.log("reg.body", reply);
   return res.status(200).json({ sucess: true, data: reply });
 });
 
@@ -38,7 +50,7 @@ exports.updateReply = asyncHandler(async (req, res, next) => {
   let reply = await await Reply.findById(req.params.id).populate({
     path: "commentId",
     select: " postId",
-    populate: { path: "postId", select: "userId" },
+    populate: { path: "postId" },
   });
 
   if (!reply) {

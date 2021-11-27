@@ -5,12 +5,6 @@ const routes = [
   },
 
   {
-    path: "/category",
-    name: "category",
-    component: () => import("pages/category.vue"),
-  },
-
-  {
     path: "/tags",
     name: "tags",
     component: () => import("pages/tags.vue"),
@@ -35,7 +29,12 @@ const routes = [
     name: "single",
     component: () => import("pages/detail-page.vue"),
   },
-
+  {
+    path: "/category/:id",
+    props: true,
+    name: "category",
+    component: () => import("pages/category.vue"),
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

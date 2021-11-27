@@ -25,10 +25,16 @@
           <span
             ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
           </span>
-
-          <span class="q-mr-md" v-if="item.categoryId"
-            >In <a href="">{{ item.categoryId.title }}</a>
-          </span>
+          <router-link
+            v-bind:to="{
+              name: 'category',
+              params: { id: item.categoryId._id },
+            }"
+          >
+            <span class="q-mr-md" v-if="item.categoryId"
+              >In {{ item.categoryId.title }}
+            </span>
+          </router-link>
 
           <span class="q-mr-md">Tags <a href="" v-html="item.tags"></a> </span>
           <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
@@ -95,7 +101,7 @@
 </template>
 
 <script>
-import moment from "moment"
+import moment from "moment";
 // import appHeader from "../components/app-header.vue";
 import postService from "../services/postService";
 
@@ -109,7 +115,7 @@ export default {
       items: [],
     };
   },
-    created: function() {
+  created: function () {
     this.moment = moment;
   },
   methods: {

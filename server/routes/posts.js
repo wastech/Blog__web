@@ -6,6 +6,7 @@ const {
   updatePost,
   deletePost,
   getCategories,
+  getRelated,
 } = require("../controllers/posts");
 
 const Post = require("../models/Post");
@@ -26,6 +27,7 @@ router
   .put(protect, authorize("admin"), updatePost)
   .delete(protect, authorize("admin"), deletePost);
 
-  router.route("/category/:categoryId").get(getCategories);
+router.route("/category/:categoryId").get(getCategories);
+   router.route("/related/:categoryId").get(getRelated);
 
 module.exports = router;

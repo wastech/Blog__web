@@ -19,6 +19,9 @@ export default {
   getCategories(categoryId) {
     return Api().get(`posts/category/${categoryId}`);
   },
+  getRelated(relatedId) {
+    return Api().get(`posts/related/${relatedId}`);
+  },
 
   // deleteData(ID) {
   //   return Api().delete(`posts/${ID}`);

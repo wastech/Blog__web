@@ -7,7 +7,8 @@ const Post = require("../models/Post");
 // @route   GET /api/v1/comments
 // @access  Private
 exports.getComments = asyncHandler(async (req, res, next) => {
-  res.status(200).json(res.advancedResults);
+    const comments = await Comment.find({});
+  res.status(200).json({ data: comments });
 });
 
 // @desc    Get comments by video id

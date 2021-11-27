@@ -28,6 +28,7 @@ const PostSchema = new Schema(
       type: Number,
       default: 0,
     },
+    
     tags: [String],
     categoryId: {
       type: mongoose.Schema.ObjectId,
