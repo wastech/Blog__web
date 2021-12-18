@@ -94,15 +94,8 @@
             placeholder="Search"
           /> -->
 
-          <q-btn
-            no-shadow
-            round
-            @mouseover="show_filter = true"
-            @mouseleave="show_filter = false"
-            class="q-mr-xs"
-            icon="fas fa-share"
-          />
-          <span v-if="show_filter">
+          <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
+          <span>
             <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs"></q-icon>
 
             <!-- <ShareNetwork
@@ -125,17 +118,6 @@
         <div class="q-pa-lg flex flex-center"></div>
       </div>
     </div>
-    <div class="q-pa-lg flex flex-center" v-if="page">
-      <q-pagination
-        v-model="page"
-        :min="currentPage"
-        :max="lastPage"
-        input
-        input-class="text-orange-10"
-        @input="goAnotherPage"
-      >
-      </q-pagination>
-    </div>
   </div>
 </template>
 
@@ -149,11 +131,7 @@ export default {
   name: "PageIndex",
   data() {
     return {
-      page: 0,
-      currentPage: 0,
-      lastPage: 0,
       tags: [],
-      show_filter: false,
       items: [],
     };
   },
@@ -170,30 +148,16 @@ export default {
           .get(`posts`)
           .then((response) => {
             this.items = response.data.data;
-            this.page = response.data.current_page;
-            this.current_page = response.data.current_page;
-            this.lastPage = response.data.pagination.next.page;
+
+            console.log(this.items);
           });
       } catch (err) {
         console.log(err.response);
       }
     },
-    goAnotherPage(page) {
-      axios
-        .get(`posts?page=${page}`)
-        .then((response) => {
-          if (response.data) {
-            this.items = response.data.data;
-            console.log(response.data.data);
-          } else {
-          }
-        })
-        .catch((error) => {});
-    },
   },
   async mounted() {
     this.queryindex();
-    this.goAnotherPage();
   },
 };
 </script>

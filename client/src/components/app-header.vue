@@ -3,7 +3,7 @@
     <div class="main">
       <q-toolbar class="text-grey shadow-none rounded-borders" no-caps>
         <q-tabs v-model="tab" class="gt-sm" shrink>
-          <q-btn flat label="Homepage" no-caps />
+          <q-btn flat label="Homepage" to="/" no-caps />
 
           <q-btn-dropdown stretch flat label="Posts" no-caps>
             <q-list>
@@ -18,8 +18,8 @@
               </q-item>
             </q-list>
           </q-btn-dropdown>
-          <q-btn flat label="About Us" no-caps />
-          <q-btn flat label="Contact Us" no-caps />
+          <q-btn flat label="About Us" no-caps to="/about" />
+          <q-btn flat label="Contact Us" no-caps to="/contact" />
         </q-tabs>
         <q-space></q-space>
         <form action="" @submit.prevent="checkName">

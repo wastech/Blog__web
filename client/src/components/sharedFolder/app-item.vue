@@ -56,8 +56,15 @@
         <span v-if="item.userId"
           ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
         /></span>
-        <span class="q-mr-md text-capitalize" v-if="item.userId"
-          ><a href="">{{ item.userId.name }}</a>
+        <span class="q-mr-md text-capitalize" v-if="item.userId">
+          <router-link
+            v-bind:to="{
+              name: 'author-page',
+              params: { id: item.userId._id },
+            }"
+          >
+            <a href="">{{ item.userId.name }}</a>
+          </router-link>
         </span>
       </div>
       <!-- icon section ends here -->
@@ -66,6 +73,11 @@
       </div>
 
       <div class="button q-mb-xl">
+        <q-btn
+          label="Continue Reading"
+          no-caps
+          class="q-mr-lg continue__button"
+        />
         <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
         <span>
           <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs" />
@@ -103,6 +115,16 @@ export default {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
+}
+.continue__button {
+  color: #000;
+  border: 1px solid #f47e00 !important;
+  border-radius: 50px !important;
+}
+.continue__button:hover {
+  color: #fff;
+  background-color: #f47e00 !important;
+  border-radius: 50px !important;
 }
 .text-h3 {
   font-size: 23px;

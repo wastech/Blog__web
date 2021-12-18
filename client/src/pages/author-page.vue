@@ -5,7 +5,7 @@
     <div class="title q-pa-xs">
       <div class="text-h5">
         <span class="q-pa-sm text-weight-bolder">Author: {{ userName }}</span>
-        <q-icon class="text-weight-bold" name="fas fa-long-arrow-alt-right" />
+        <q-icon class="" name="fas fa-long-arrow-alt-right" />
         {{ description }}
       </div>
     </div>

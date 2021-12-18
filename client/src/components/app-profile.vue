@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <q-separator />
     <div class="main q-pa-md">
       <div class="row q-col-gutter-md">
@@ -15,9 +15,13 @@
           </div>
           <div class="text q-my-sm">
             <div class="text-body2">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua.
+              I am a tech enthusiast with a flair for exploring new
+              technologies. I strongly recognize that efficient communication
+              between team members is the holy grail of true team success.
+              highly motivated team player with analytical, critical thinking
+              and problem solving skills, I am always looking for opportunities
+              to gain relevant experience by handling challenging roles within
+              diverse teams to contribute immense strategic value
             </div>
           </div>
         </div>
@@ -28,13 +32,27 @@
             <div class="text-h5">Tweets</div>
           </div>
           <div class="tweet q-my-md">
+            <div class="text-body1 q-my-md">
+              <q-icon name="fab fa-twitter" size="xs" class="q-mr-sm"></q-icon>
+              <span class="text-bold"
+                ><a href="/" class="a__about">Wastech</a>
+              </span>
+              @Wastech Do not use your energy to worry. Use your energy to
+              believe, to create, to learn, to think and to grow.
+            </div>
+            <div class="duration">
+              <div class="text-caption">
+                <a href="/" class="a">about 2 months ago</a>
+              </div>
+            </div>
+            <q-separator />
             <div class="text-body1">
               <q-icon name="fab fa-twitter" size="xs" class="q-mr-sm"></q-icon>
               <span class="text-bold"
-                ><a href="/" class="a__about">Ahmad Works</a>
+                ><a href="/" class="a__about">Wastech</a>
               </span>
-              @AppleSupport If you need to know the version number, its 9.2.1
-              (13D15)
+              @Wastech Do not use your energy to worry. Use your energy to
+              believe, to create, to learn, to think and to grow.
             </div>
 
             <div class="duration">
@@ -82,6 +100,7 @@ img {
 }
 .body2 {
   font-size: 14px;
+  text-align: left;
   line-height: 23px;
   color: #666;
 }
