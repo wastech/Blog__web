@@ -3,8 +3,8 @@
     <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <!-- <app-header /> -->
     <div class="" v-for="item in items" :key="item">
-      <div class="image" v-if="item.imageUrl[0]">
-        <img :src="item.imageUrl[0].url" alt="" />
+      <div class="image" v-if="item.imageUrl">
+        <img :src="item.imageUrl" alt="" />
       </div>
       <div class="text">
         <div class="title text-left text-dark q-mt-sm q-mb-none">
@@ -36,14 +36,32 @@
             </span>
           </router-link>
 
-          <span class="q-mr-md">Tags <a href="" v-html="item.tags"></a> </span>
+          <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
+            >Tags
+            <router-link
+              v-bind:to="{
+                name: 'tags',
+                params: { id: tag },
+              }"
+            >
+              {{ tag }}
+            </router-link>
+          </span>
+
           <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
-          <span class="q-mr-md"><a href="">2 comments</a> </span>
+          <!-- <span class="q-mr-md"><a href="">2 comments</a> </span> -->
           <span
             ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
           /></span>
-          <span class="q-mr-md text-capitalize" v-if="item.userId"
-            ><a href="">{{ item.userId.name }}</a>
+          <span class="q-mr-md text-capitalize" v-if="item.userId">
+            <router-link
+              v-bind:to="{
+                name: 'author-page',
+                params: { id: item.userId._id },
+              }"
+            >
+              <a href="">{{ item.userId.name }}</a>
+            </router-link>
           </span>
         </div>
         <!-- icon section ends here -->
@@ -86,7 +104,17 @@
           />
           <span v-if="show_filter">
             <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs"></q-icon>
-            <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs"></q-icon>
+
+            <!-- <ShareNetwork
+                network="twitter"
+               :url="`http://localhost:8080/single` + item._id"
+                :title="item.title"
+
+
+              > -->
+            <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs" />
+            <!-- </ShareNetwork> -->
+
             <q-icon
               name="fab fa-google-plus-g"
               size="xs"
@@ -94,8 +122,19 @@
             ></q-icon>
           </span>
         </div>
+        <div class="q-pa-lg flex flex-center"></div>
       </div>
-      <q-separator />
+    </div>
+    <div class="q-pa-lg flex flex-center" v-if="page">
+      <q-pagination
+        v-model="page"
+        :min="currentPage"
+        :max="lastPage"
+        input
+        input-class="text-orange-10"
+        @input="goAnotherPage"
+      >
+      </q-pagination>
     </div>
   </div>
 </template>
@@ -104,12 +143,15 @@
 import moment from "moment";
 // import appHeader from "../components/app-header.vue";
 import postService from "../services/postService";
+import Api from "../services/Api";
 
 export default {
   name: "PageIndex",
   data() {
     return {
-      current: 3,
+      page: 0,
+      currentPage: 0,
+      lastPage: 0,
       tags: [],
       show_filter: false,
       items: [],
@@ -117,20 +159,41 @@ export default {
   },
   created: function () {
     this.moment = moment;
+    //   this.queryindex();
+    // this.showIn();
   },
+
   methods: {
-    async getPosts() {
+    async queryindex() {
       try {
-        await postService.getPosts().then((response) => {
-          this.items = response.data.data;
-        });
+        Api()
+          .get(`posts`)
+          .then((response) => {
+            this.items = response.data.data;
+            this.page = response.data.current_page;
+            this.current_page = response.data.current_page;
+            this.lastPage = response.data.pagination.next.page;
+          });
       } catch (err) {
         console.log(err.response);
       }
     },
+    goAnotherPage(page) {
+      axios
+        .get(`posts?page=${page}`)
+        .then((response) => {
+          if (response.data) {
+            this.items = response.data.data;
+            console.log(response.data.data);
+          } else {
+          }
+        })
+        .catch((error) => {});
+    },
   },
   async mounted() {
-    this.getPosts();
+    this.queryindex();
+    this.goAnotherPage();
   },
 };
 </script>
@@ -138,7 +201,7 @@ export default {
 <style scoped>
 .continue__button {
   color: #000;
-  border: 3px solid #f47e00 !important;
+  border: 1px solid #f47e00 !important;
   border-radius: 50px !important;
 }
 .continue__button:hover {

@@ -13,14 +13,24 @@ export default {
   getPosts() {
     return Api().get("posts");
   },
+  // getUserPosts() {
+  //   return Api().get("posts/userpost");
+  // },
   showpost(postId) {
     return Api().get(`posts/${postId}`);
+  },
+  sigleUserPosts(userId) {
+    return Api().get(`posts/userpost/${userId}`);
   },
   getCategories(categoryId) {
     return Api().get(`posts/category/${categoryId}`);
   },
   getRelated(relatedId) {
     return Api().get(`posts/related/${relatedId}`);
+  },
+
+  getTags(tagsId) {
+    return Api().get(`posts/tags/${tagsId}`);
   },
 
   // deleteData(ID) {

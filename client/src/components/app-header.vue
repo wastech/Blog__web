@@ -22,6 +22,7 @@
           <q-btn flat label="Contact Us" no-caps />
         </q-tabs>
         <q-space></q-space>
+        <form action="" @submit.prevent="checkName">
         <q-tabs v-model="tab" shrink no-caps class="text-dark gt-sm">
           <q-icon
             :name="icon.iconName"
@@ -36,7 +37,7 @@
             borderless
             dense
             debounce="300"
-            v-model="filter"
+            v-model="keyword"
             placeholder="Search"
           />
           <q-btn
@@ -46,6 +47,7 @@
             flat
           />
         </q-tabs>
+        </form>
 
         <q-btn-group rounded class="lt-md" style="width: 100%">
           <q-btn class="full-width" label="menu" @click="left = !left" />
@@ -138,6 +140,7 @@ export default {
     return {
       show_filter: false,
       left: false,
+          keyword: "",
       tab: "",
       text: "",
       icons: [
@@ -151,6 +154,15 @@ export default {
       ],
     };
   },
+  methods:{
+       checkName() {
+      if (!this.keyword) {
+        console.log("please enter your keyword");
+      } else {
+        this.$router.push(`/searchpage/${this.keyword}`);
+      }
+    },
+  }
 };
 </script>
 

@@ -4,10 +4,10 @@
     <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
     <div class="title q-pa-xs">
       <div class="text-h5 text-weight-bolder">
-        <span class="q-pa-sm">Category: Liferrr Style</span>
+        <span class="q-pa-sm">Category: {{ category }}</span>
       </div>
     </div>
-    <div v-for="item in items" :key="item">
+    <div v-for="item in items" :key="item.id">
       <app-item :item="item" />
     </div>
   </div>
@@ -24,6 +24,7 @@ export default {
   components: { AppItem },
   data() {
     return {
+      category: "",
       items: [],
       id: this.$route.params.id,
     };
@@ -36,10 +37,11 @@ export default {
       try {
         await postService.getCategories(this.id).then((response) => {
           this.items = response.data.categories;
-          console.log(response);
+          this.category = response.data.categories[0].categoryId.title;
+          console.log(response.data.categories);
         });
       } catch (err) {
-        console.log(err.response);
+        // console.log(err.response);
       }
     },
   },

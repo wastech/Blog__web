@@ -27,9 +27,6 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-        <!-- <span class="q-mr-md" v-if="item.categoryId"
-          >In <a href="">{{ item.categoryId.title }}</a>
-        </span> -->
         <router-link
           v-if="item.categoryId"
           v-bind:to="{
@@ -60,8 +57,7 @@
           ><a href="">{{ item.userId.name }}</a>
         </span>
       </div>
-      <!-- icon section ends here -->
-      <div class="paragraph q-my-md text-justify ellipsis-3-lines">
+      <div class="paragraph q-my-md text-justify">
         <div class="text-body1" v-html="item.description"></div>
       </div>
 

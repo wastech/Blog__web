@@ -8,10 +8,17 @@
         :key="item"
       >
         <div class="image" v-if="item.imageUrl">
-          <img :src="item.imageUrl[0].url" alt="" />
+          <img :src="item.imageUrl" alt="" />
         </div>
         <div class="text q-mb-xl">
-          <div class="text-h4 text-bold">{{ item.title }}</div>
+          <router-link
+            v-bind:to="{
+              name: 'single',
+              params: { id: item._id },
+            }"
+          >
+            <div class="text-h4 text-bold">{{ item.title }}</div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -48,7 +55,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 img {

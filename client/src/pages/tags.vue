@@ -4,80 +4,49 @@
     <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
     <div class="title q-pa-xs">
       <div class="text-h5 text-weight-bolder">
-        <span class="q-pa-sm">Tags: man</span>
+        <span class="q-pa-sm">Tag: <span class="" v-html="tag"> </span></span>
       </div>
     </div>
-    <div v-for="item in items" :key="item">
+    <div v-for="item in items" :key="item.id">
       <app-item :item="item" />
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment";
 // import appHeader from "../components/app-header.vue";
+import postService from "../services/postService";
 import AppItem from "../components/sharedFolder/app-item.vue";
 
 export default {
-  components: { AppItem },
   name: "PageIndex",
+  components: { AppItem },
   data() {
     return {
-      items: [
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/cheerful-loving-couple-bakers-drinking-coffee-PCAVA6B-2.jpg",
-          title: "Loft Office With Vintage Decor For Creative Working",
-          description:
-            " It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offerin  similar services — on the surface, at least. Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at",
-          category: "images post",
-          tags: "design",
-          createdAt: "May 17, 2015",
-          authorImage:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author-50x50.jpg",
-          name: "aremu aremu",
-        },
-
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/cheerful-loving-couple-bakers-drinking-coffee-PCAVA6B-2.jpg",
-          title: "Loft Office With Vintage Decor For Creative Working",
-          description:
-            " It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offerin  similar services — on the surface, at least. Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at",
-          category: "images post",
-          tags: "design",
-          createdAt: "May 17, 2015",
-          authorImage:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author-50x50.jpg",
-          name: "aremu aremu",
-        },
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/cheerful-loving-couple-bakers-drinking-coffee-PCAVA6B-2.jpg",
-          title: "Loft Office With Vintage Decor For Creative Working",
-          description:
-            " It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offerin  similar services — on the surface, at least. Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at",
-          category: "images post",
-          tags: "design",
-          createdAt: "May 17, 2015",
-          authorImage:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author-50x50.jpg",
-          name: "aremu aremu",
-        },
-        {
-          image:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/cheerful-loving-couple-bakers-drinking-coffee-PCAVA6B-2.jpg",
-          title: "Loft Office With Vintage Decor For Creative Working",
-          description:
-            " It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available. However, the industry is fast becoming overcrowded, heaving with agencies offerin  similar services — on the surface, at least. Producing creative, fresh projects is the key to standing out. Unique side projects are the best place to innovate, but balancing commercially and creatively lucrative work is tricky. So, this article looks at",
-          category: "images post",
-          tags: "design",
-          createdAt: "May 17, 2015",
-          authorImage:
-            "https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author-50x50.jpg",
-          name: "aremu aremu",
-        },
-      ],
+      tag: [],
+      items: [],
+      id: this.$route.params.id,
     };
+  },
+  created: function () {
+    this.moment = moment;
+  },
+  methods: {
+    async getPosts() {
+      try {
+        await postService.getTags(this.id).then((response) => {
+          this.items = response.data.tags;
+          this.tag = response.data.tags[0].tags;
+          console.log(response.data.tags[0].tags);
+        });
+      } catch (err) {
+        // console.log(err.response);
+      }
+    },
+  },
+  async mounted() {
+    this.getPosts();
   },
 };
 </script>

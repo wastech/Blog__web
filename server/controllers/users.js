@@ -15,7 +15,10 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/auth/users/:id
 // @access    Private/Admin
 exports.getUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  console.log("test", req.params.id)
+  const user = await User.findById(req.params.id).populate({
+    path: "postId",
+  });
   if (!user) {
     return next(new ErrorResponse(`No User with that id of ${req.params.id}`));
   }

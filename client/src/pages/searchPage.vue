@@ -1,14 +1,21 @@
 <template>
   <div class="main">
     <!-- <app-header /> -->
-    <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
+    <div class="text-h4 text-dark q-my-lg text-bold ">Writing</div>
     <div class="title q-pa-xs">
       <div class="text-h5">
-        <span class="q-pa-sm text-weight-bolder">Author: {{ userName }}</span>
-        <q-icon class="text-weight-bold" name="fas fa-long-arrow-alt-right" />
-        {{ description }}
+        <span class="q-pa-sm text-weight-bolder"
+          >Search Results for : {{ keyword }}</span
+        >
       </div>
     </div>
+    <section v-if="items <= 0" class="q-my-lg">
+      <div class="text-h4 text-bold q-my-md text-weight-bold">Nothing Found</div>
+      <div class="text-body1">
+        Sorry, but nothing matched your search terms. Please try again with some
+        different keywords.
+      </div>
+    </section>
     <div v-for="item in items" :key="item">
       <app-item :item="item" />
     </div>
@@ -18,6 +25,7 @@
 <script>
 // import appHeader from "../components/app-header.vue";
 import postService from "../services/postService";
+import Api from "../services/Api";
 import AppItem from "../components/sharedFolder/app-item.vue";
 
 export default {
@@ -28,17 +36,18 @@ export default {
       items: [],
       description: "",
       userName: "",
-      id: this.$route.params.id,
+      keyword: this.$route.params.keyword,
     };
   },
   methods: {
     async getPosts() {
       try {
-        await postService.sigleUserPosts(this.id).then((response) => {
-          this.items = response.data.userPosts;
-          this.userName = response.data.userPosts[0].userId.name;
-          this.description = response.data.userPosts[0].userId.description;
-        });
+        await Api()
+          .get(`posts/?keyword=${this.keyword}`)
+          .then((response) => {
+            this.items = response.data.data;
+            console.log(this.items);
+          });
       } catch (err) {
         // console.log(err.response);
       }

@@ -12,23 +12,35 @@ const PostSchema = new Schema(
       type: String,
       default: "",
     },
-    imageUrl: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+
+    imageUrl: {
+      type: String,
+      match: [/^(ftp|http|https):\/\/[^ "]+$/, "Invalid url"],
+      default: [
+        "https://res.cloudinary.com/agustems/image/upload/v1598881434/roomer/no-image_klm" +
+          "dah.png",
+      ],
+    },
+    cloudinary_id: {
+      type: String,
+    },
+    // imageUrl: [
+    //   {
+    //     public_id: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //     url: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //   },
+    // ],
     views: {
       type: Number,
       default: 0,
     },
-    
+
     tags: [String],
     categoryId: {
       type: mongoose.Schema.ObjectId,

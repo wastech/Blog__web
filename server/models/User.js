@@ -12,7 +12,6 @@ const UserSchema = new mongoose.Schema({
   description: {
     type: String,
     minlength: [3, "Must be three characters long"],
-  
   },
   email: {
     type: String,
@@ -22,6 +21,10 @@ const UserSchema = new mongoose.Schema({
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please add a valid email",
     ],
+  },
+  postId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Post",
   },
   avatar: {
     public_id: {

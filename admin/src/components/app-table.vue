@@ -27,7 +27,7 @@
           <td class="text-center">
             <div class="avatar text-left">
               <q-avatar rounded class="" size="60px">
-                <img :src="item.imageUrl[0].url" />
+                <img :src="item.imageUrl" />
               </q-avatar>
             </div>
           </td>
