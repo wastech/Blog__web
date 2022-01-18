@@ -22,13 +22,13 @@ const { protect, authorize } = require("../middleware/auth");
 
 router
   .route("/")
-  .get( getPosts)
-  .post(upload.single("imageUrl"), protect, authorize("admin"), addPost);
+  .get(getPosts)
+  .post(protect, authorize("admin"), upload.single("imageUrl"), addPost);
 
 router
   .route("/:id")
   .get(getPost)
-  .put(upload.single("imageUrl"), protect, authorize("admin"), updatePost)
+  .put(protect, authorize("admin"), upload.single("imageUrl"), updatePost)
   .delete(protect, authorize("admin"), deletePost);
 
 router.route("/category/:categoryId").get(getCategories);

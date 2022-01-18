@@ -4,27 +4,13 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const cloudinary = require("../utils/cloudinary");
 
-// Create new product   =>   /api/v1/admin/post/new
+// Create new post   =>   /api/v1/admin/post/new
 exports.addPost = asyncHandler(async (req, res, next) => {
   const result = await cloudinary.uploader.upload(req.file.path, {
     folder: "post",
     resource_type: "auto",
   });
-  // const file = req.files.imageUrl;
-  // const result = await cloudinary.v2.uploader.upload(file.tempFilePath, {
-  //   folder: "post",
-  //   resource_type: "auto",
-  // });
-  // Add user to req,body
-  // req.body.user = req.user.id;
-  // const post = await Post.create({
-  //   ...req.body,
-  //   userId: req.user.id,
-  //   imageUrl: {
-  //     public_id: result.public_id,
-  //     url: result.secure_url,
-  //   },
-  // });
+
   let post = new Post({
     title: req.body.title,
     description: req.body.description,
@@ -39,9 +25,6 @@ exports.addPost = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({ success: true, data: post });
 });
-// console.log("this is post", post);
-//   res.status(200).json({ data: post });
-// });
 
 // Get all posts   =>   /api/v1/posts?keyword=apple
 exports.getPosts = asyncHandler(async (req, res, next) => {
@@ -73,16 +56,6 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc    Get single post
-// @route   GET /api/v1/posts/:id
-// exports.getPost = asyncHandler(async (req, res, next) => {
-//   const post = await Post.findById(req.params.id);
-//   if (!post) {
-//     return next(new ErrorResponse(`No post with that id of ${req.params.id}`));
-//   }
-//   res.status(200).json({ sucess: true, data: post });
-// });
-
 // Get single post details   =>   /api/v1/post/:id
 exports.getPost = asyncHandler(async (req, res, next) => {
   const post = await Post.findById(req.params.id)
@@ -99,7 +72,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Get single post details   =>   /api/v1/post/:categoryId
+// Get  post categories   =>   /api/v1/post/:categoryId
 exports.getCategories = asyncHandler(async (req, res, next) => {
   const categories = await Post.find({ categoryId: req.params.categoryId })
     .populate("userId")
@@ -114,7 +87,7 @@ exports.getCategories = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Get single post details   =>   /api/v1/post/:userId
+// Get user post   =>   /api/v1/post/:userId
 exports.getUserPosts = asyncHandler(async (req, res, next) => {
   const userPosts = await Post.find({ userId: req.params.userId })
     .populate("userId")

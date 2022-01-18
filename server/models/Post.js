@@ -15,27 +15,15 @@ const PostSchema = new Schema(
 
     imageUrl: {
       type: String,
-      match: [/^(ftp|http|https):\/\/[^ "]+$/, "Invalid url"],
+      match: [/^(ftp|http|https):\/\/[^ "]+$/, "Invalid url"], //ftp 
       default: [
         "https://res.cloudinary.com/agustems/image/upload/v1598881434/roomer/no-image_klm" +
           "dah.png",
       ],
     },
-    cloudinary_id: {
+    cloudinary_id: { //image_id
       type: String,
     },
-    // imageUrl: [
-    //   {
-    //     public_id: {
-    //       type: String,
-    //       required: true,
-    //     },
-    //     url: {
-    //       type: String,
-    //       required: true,
-    //     },
-    //   },
-    // ],
     views: {
       type: Number,
       default: 0,

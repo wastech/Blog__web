@@ -28,6 +28,7 @@
             :name="icon.iconName"
             v-for="icon in icons"
             :key="icon"
+            :to="icon.link"
             class="q-mr-lg"
           />
 
@@ -145,7 +146,7 @@ export default {
       text: "",
       icons: [
         { iconName: "fab fa-facebook-f" },
-        { iconName: "fab fa-twitter" },
+        { iconName: "fab fa-twitter", link: "https://twitter.com/wastech_a"},
         { iconName: "fab fa-google-plus-g" },
         { iconName: "fab fa-behance" },
         { iconName: "fab fa-dribbble" },
