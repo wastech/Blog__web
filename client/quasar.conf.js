@@ -7,10 +7,12 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
 /* eslint-env node */
+const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { configure } = require("quasar/wrappers");
 
 module.exports = configure(function (ctx) {
+  outputDir: path.resolve(__dirname, "../server/dist");
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -43,7 +45,7 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
-
+      distDir: ctx.mode.spa ? "public" : null,
       // transpile: false,
       // publicPath: '/',
 

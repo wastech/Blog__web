@@ -169,5 +169,6 @@ export default {
 a {
   text-decoration: none;
   color: #1d1d1d;
+  text-decoration: none;
 }
 </style>

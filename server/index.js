@@ -14,9 +14,10 @@ const hpp = require("hpp");
 const cors = require("cors");
 const errorHandler = require("./middleware/error");
 const connectDB = require("./config/db");
-
-// Load env vars
-dotenv.config({ path: "./config/config.env" });
+  const serveStatic = require("serve-static");
+  const history = require("connect-history-api-fallback")
+    // Load env vars
+    dotenv.config({ path: "./config/config.env" });
 
 // Connect to database
 connectDB();
@@ -73,6 +74,28 @@ app.use(hpp());
 
 // Enable CORS
 app.use(cors());
+
+// if (process.env.NODE_ENV === "production") {
+//   app.use(history());
+//   app.use(serveStatic(__dirname + "/dist/spa"));
+ 
+// }
+// Production
+if (process.env.NODE_ENV === "production") {
+  // Static folder
+  app.use(express.static(__dirname + "/dist/"));
+
+  // handle & forward reqest errors
+  app.use((error, req, res, next) => {
+    res.status(error.statusCode || 500).json({
+      status: error.status,
+      message: error.message,
+    });
+  });
+  // Handle SPA
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + "/dist/index.html"));
+}
+
 
 // Mount routers
 

@@ -15,7 +15,14 @@
       <!-- <app-header /> -->
       <div class="" v-for="item in items" :key="item">
         <div class="image" v-if="item.imageUrl">
-          <img :src="item.imageUrl" class="shadow-3" alt="" />
+          <img
+            :src="item.imageUrl"
+            class="shadow-3"
+            alt=""
+            v-bind:style="
+              $q.screen.lt.md ? { height: '25vh' } : { height: '50vh' }
+            "
+          />
         </div>
         <div class="text">
           <div class="title text-left text-dark q-mt-sm q-mb-none">
@@ -84,8 +91,8 @@
           <div class="button q-mb-xl">
             <router-link
               v-bind:to="{
-                name: 'author-page',
-                params: { id: item.userId._id },
+                name: 'single',
+                params: { id: item._id },
               }"
             >
               <q-btn
@@ -122,7 +129,6 @@
 <script>
 import moment from "moment";
 import postService from "../services/postService";
-import Api from "../services/Api";
 
 export default {
   name: "PageIndex",
@@ -140,13 +146,11 @@ export default {
   methods: {
     async queryindex() {
       try {
-        Api()
-          .get(`posts`)
-          .then((response) => {
-            (this.loading = false), (this.items = response.data.data);
-
-            console.log(this.items);
-          });
+        await postService.getPosts().then((response) => {
+          this.items = response.data.data;
+          this.loading = false;
+          console.log(this.items);
+        });
       } catch (err) {
         console.log(err.response);
       }
