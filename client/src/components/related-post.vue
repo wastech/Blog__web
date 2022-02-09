@@ -7,8 +7,8 @@
         v-for="item in items"
         :key="item"
       >
-        <div class="image" v-if="item.imageUrl">
-          <img :src="item.imageUrl" alt="" />
+        <div class="image "  v-if="item.imageUrl">
+          <img :src="item.imageUrl" class=" shadow-3" alt="" />
         </div>
         <div class="text q-mb-xl">
           <router-link

@@ -23,54 +23,37 @@
         </q-tabs>
         <q-space></q-space>
         <form action="" @submit.prevent="checkName">
-        <q-tabs v-model="tab" shrink no-caps class="text-dark gt-sm">
-          <q-icon
-            :name="icon.iconName"
-            v-for="icon in icons"
-            :key="icon"
-            :to="icon.link"
-            class="q-mr-lg"
-          />
+          <q-tabs v-model="tab" shrink no-caps class="text-dark gt-sm">
+            <q-icon
+              :name="icon.iconName"
+              v-for="icon in icons"
+              :key="icon"
+              :to="icon.link"
+              class="q-mr-lg"
+            />
 
-          <q-input
-            v-if="show_filter"
-            filled
-            borderless
-            dense
-            debounce="300"
-            v-model="keyword"
-            placeholder="Search"
-          />
-          <q-btn
-            class="q-ml-xs"
-            icon="search"
-            @click="show_filter = !show_filter"
-            flat
-          />
-        </q-tabs>
+            <q-input
+              v-if="show_filter"
+              filled
+              borderless
+              dense
+              debounce="300"
+              v-model="keyword"
+              placeholder="Search"
+            />
+            <q-btn
+              class="q-ml-xs"
+              icon="search"
+              @click="show_filter = !show_filter"
+              flat
+            />
+          </q-tabs>
         </form>
 
         <q-btn-group rounded class="lt-md" style="width: 100%">
           <q-btn class="full-width" label="menu" @click="left = !left" />
           <q-btn icon="menu" class="full-width" @click="left = !left" />
         </q-btn-group>
-
-        <!-- <q-btn
-          align="between"
-
-          class="btn-full-width lt-md"
-          color="brown-5"
-          icon="menu"
-          label="menu"
-        /> -->
-        <!-- <q-btn
-          dense
-          flat
-          round
-          icon="menu"
-          @click="left = !left"
-
-        /> -->
       </q-toolbar>
     </div>
     <q-separator />
@@ -122,14 +105,20 @@
             class="q-mr-lg"
           />
         </div>
-      <q-input rounded outlined v-model="text" dense placeholder="hit to search" type="search">
-        <template v-slot:append>
-          <q-avatar>
-          <q-icon name="search"/>
-          </q-avatar>
-        </template>
-      </q-input>
-
+        <q-input
+          rounded
+          outlined
+          v-model="text"
+          dense
+          placeholder="hit to search"
+          type="search"
+        >
+          <template v-slot:append>
+            <q-avatar>
+              <q-icon name="search" />
+            </q-avatar>
+          </template>
+        </q-input>
       </q-scroll-area>
     </q-drawer>
   </q-layout>
@@ -141,12 +130,12 @@ export default {
     return {
       show_filter: false,
       left: false,
-          keyword: "",
+      keyword: "",
       tab: "",
       text: "",
       icons: [
         { iconName: "fab fa-facebook-f" },
-        { iconName: "fab fa-twitter", link: "https://twitter.com/wastech_a"},
+        { iconName: "fab fa-twitter", link: "https://twitter.com/wastech_a" },
         { iconName: "fab fa-google-plus-g" },
         { iconName: "fab fa-behance" },
         { iconName: "fab fa-dribbble" },
@@ -155,15 +144,15 @@ export default {
       ],
     };
   },
-  methods:{
-       checkName() {
+  methods: {
+    checkName() {
       if (!this.keyword) {
         console.log("please enter your keyword");
       } else {
         this.$router.push(`/searchpage/${this.keyword}`);
       }
     },
-  }
+  },
 };
 </script>
 

@@ -74,23 +74,6 @@
         </q-table>
       </q-card-section>
     </q-card>
-
-    <!-- <div
-      class="text q-my-xl"
-      v-bind:style="$q.screen.lt.sm ? { width: '80%' } : { width: '70%' }"
-    >
-      <div class="row q-col-gutter-lg">
-        <div
-          class="col-xs-12 col-sm-2 col-md-2 col-lg-2 col-xl-2"
-          v-for="item in items"
-          :key="item"
-        >
-          <q-card-section class="bg-primary text-white">
-            <div class="text-caption">{{ item.title }}</div>
-          </q-card-section>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -141,7 +124,6 @@ export default {
       try {
         await categoriesService.cate().then((response) => {
           this.data = response.data.data;
-          console.log("this is ", response.data);
         });
       } catch (err) {
         console.log(err.response);

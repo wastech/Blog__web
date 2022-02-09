@@ -3,14 +3,16 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
 const sendEmail = require("../utils/sendEmail");
 const User = require("../models/User");
-const cloudinary = require("cloudinary");
+const cloudinary = require("../utils/cloudinary");
 
 // @desc      Register user
 // @route     POST /api/v1/auth/register
 // @access    Public
 exports.register = asyncHandler(async (req, res, next) => {
-  const file = req.files.avatar;
-  const result = await cloudinary.v2.uploader.upload(file.tempFilePath, {
+
+  const file = req.file.path;
+
+  const result = await cloudinary.uploader.upload(file, {
     folder: "avatars",
     width: 150,
     crop: "scale",
@@ -18,7 +20,6 @@ exports.register = asyncHandler(async (req, res, next) => {
     fetch_format: "auto",
     resource_type: "auto",
   });
-
   const { name, email, password, role, description } = req.body;
 
   // Create user

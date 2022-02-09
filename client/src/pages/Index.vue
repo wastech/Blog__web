@@ -1,129 +1,126 @@
 <template>
   <div class="main q-pa-md">
-    <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
-    <!-- <app-header /> -->
-    <div class="" v-for="item in items" :key="item">
-      <div class="image" v-if="item.imageUrl">
-        <img :src="item.imageUrl" alt="" />
-      </div>
-      <div class="text">
-        <div class="title text-left text-dark q-mt-sm q-mb-none">
-          <router-link
-            v-bind:to="{
-              name: 'single',
-              params: { id: item._id },
-            }"
-          >
-            <div class="text-h3 text-bold text-capitalize">
-              {{ item.title }}
-            </div>
-          </router-link>
+    <div class="progres">
+      <q-linear-progress
+        dark
+        rounded
+        indeterminate
+        color="secondary"
+        class="q-mt-sm"
+        v-if="loading"
+      />
+    </div>
+    <section v-if="!loading">
+      <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
+      <!-- <app-header /> -->
+      <div class="" v-for="item in items" :key="item">
+        <div class="image" v-if="item.imageUrl">
+          <img :src="item.imageUrl" class="shadow-3" alt="" />
         </div>
-
-        <!-- icon section starts here -->
-        <div class="blog__span text-left q-my-no-margin">
-          <span
-            ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
-          </span>
-          <router-link
-            v-bind:to="{
-              name: 'category',
-              params: { id: item.categoryId._id },
-            }"
-          >
-            <span class="q-mr-md" v-if="item.categoryId"
-              >In {{ item.categoryId.title }}
-            </span>
-          </router-link>
-
-          <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
-            >Tags
+        <div class="text">
+          <div class="title text-left text-dark q-mt-sm q-mb-none">
             <router-link
               v-bind:to="{
-                name: 'tags',
-                params: { id: tag },
+                name: 'single',
+                params: { id: item._id },
               }"
             >
-              {{ tag }}
+              <div class="text-h3 text-bold text-capitalize">
+                {{ item.title }}
+              </div>
             </router-link>
-          </span>
+          </div>
 
-          <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
-          <!-- <span class="q-mr-md"><a href="">2 comments</a> </span> -->
-          <span
-            ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
-          /></span>
-          <span class="q-mr-md text-capitalize" v-if="item.userId">
+          <!-- icon section starts here -->
+          <div class="blog__span text-left q-my-no-margin">
+            <span
+              ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
+            </span>
+            <router-link
+              v-bind:to="{
+                name: 'category',
+                params: { id: item.categoryId._id },
+              }"
+            >
+              <span class="q-mr-md" v-if="item.categoryId"
+                >In {{ item.categoryId.title }}
+              </span>
+            </router-link>
+
+            <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
+              >Tags
+              <router-link
+                v-bind:to="{
+                  name: 'tags',
+                  params: { id: tag },
+                }"
+              >
+                {{ tag }}
+              </router-link>
+            </span>
+
+            <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
+            <span
+              ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
+            /></span>
+            <span class="q-mr-md text-capitalize" v-if="item.userId">
+              <router-link
+                v-bind:to="{
+                  name: 'author-page',
+                  params: { id: item.userId._id },
+                }"
+              >
+                <a href="">{{ item.userId.name }}</a>
+              </router-link>
+            </span>
+          </div>
+          <!-- icon section ends here -->
+
+          <!-- paragraph starts here -->
+          <div class="paragraph q-my-md text-justify ellipsis-3-lines">
+            <div class="text-body1" v-html="item.description"></div>
+          </div>
+
+          <div class="button q-mb-xl">
             <router-link
               v-bind:to="{
                 name: 'author-page',
                 params: { id: item.userId._id },
               }"
             >
-              <a href="">{{ item.userId.name }}</a>
+              <q-btn
+                label="Continue Reading"
+                no-caps
+                class="q-mr-lg continue__button"
+              />
             </router-link>
-          </span>
+
+            <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
+            <span>
+              <q-icon
+                name="fab fa-facebook-f"
+                size="xs"
+                class="q-mr-xs"
+              ></q-icon>
+              <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs" />
+              <!-- </ShareNetwork> -->
+
+              <q-icon
+                name="fab fa-google-plus-g"
+                size="xs"
+                class="q-mr-xs"
+              ></q-icon>
+            </span>
+          </div>
+          <div class="q-pa-lg flex flex-center"></div>
         </div>
-        <!-- icon section ends here -->
-
-        <!-- paragraph starts here -->
-        <div class="paragraph q-my-md text-justify ellipsis-3-lines">
-          <div class="text-body1" v-html="item.description"></div>
-        </div>
-
-        <div class="button q-mb-xl">
-          <q-btn
-            label="Continue Reading"
-            no-caps
-            class="q-mr-lg continue__button"
-          />
-
-          <!-- <q-btn
-            class="q-ml-xs"
-            icon="search"
-            @click="show_filter = !show_filter"
-            flat
-          /> -->
-          <!-- <q-input
-            v-if="show_filter"
-            filled
-            borderless
-            dense
-            debounce="300"
-            v-model="filter"
-            placeholder="Search"
-          /> -->
-
-          <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
-          <span>
-            <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs"></q-icon>
-
-            <!-- <ShareNetwork
-                network="twitter"
-               :url="`http://localhost:8080/single` + item._id"
-                :title="item.title"
-
-
-              > -->
-            <q-icon name="fab fa-twitter" size="xs" class="q-mr-xs" />
-            <!-- </ShareNetwork> -->
-
-            <q-icon
-              name="fab fa-google-plus-g"
-              size="xs"
-              class="q-mr-xs"
-            ></q-icon>
-          </span>
-        </div>
-        <div class="q-pa-lg flex flex-center"></div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
 import moment from "moment";
-// import appHeader from "../components/app-header.vue";
 import postService from "../services/postService";
 import Api from "../services/Api";
 
@@ -133,12 +130,11 @@ export default {
     return {
       tags: [],
       items: [],
+      loading: true,
     };
   },
   created: function () {
     this.moment = moment;
-    //   this.queryindex();
-    // this.showIn();
   },
 
   methods: {
@@ -147,7 +143,7 @@ export default {
         Api()
           .get(`posts`)
           .then((response) => {
-            this.items = response.data.data;
+            (this.loading = false), (this.items = response.data.data);
 
             console.log(this.items);
           });

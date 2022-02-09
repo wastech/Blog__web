@@ -4,6 +4,7 @@
       <img
         :src="item.imageUrl"
         alt=""
+        class="shadow-3"
         v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '50vh' }"
       />
     </div>
@@ -27,9 +28,7 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-        <!-- <span class="q-mr-md" v-if="item.categoryId"
-          >In <a href="">{{ item.categoryId.title }}</a>
-        </span> -->
+
         <router-link
           v-if="item.categoryId"
           v-bind:to="{
@@ -50,9 +49,7 @@
             {{ tag }}
           </router-link>
         </span>
-        <!-- <span class="q-mr-md">Tags <a href="" v-html="item.tags"></a> </span> -->
         <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
-        <!-- <span class="q-mr-md"><a href="">2 comments</a> </span> -->
         <span v-if="item.userId"
           ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
         /></span>
@@ -73,11 +70,19 @@
       </div>
 
       <div class="button q-mb-xl">
-        <q-btn
-          label="Continue Reading"
-          no-caps
-          class="q-mr-lg continue__button"
-        />
+        <router-link
+          v-if="typeof item.id !== 'undefined'"
+          v-bind:to="{
+            name: 'single',
+            params: { id: item._id },
+          }"
+        >
+          <q-btn
+            label="Continue Reading"
+            no-caps
+            class="q-mr-lg continue__button"
+          />
+        </router-link>
         <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
         <span>
           <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs" />
@@ -115,6 +120,7 @@ export default {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
+  height: 50vh;
 }
 .continue__button {
   color: #000;

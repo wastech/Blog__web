@@ -6,7 +6,9 @@
     <related-post :categoryId="item.categoryId" />
     <!-- <app-comment /> -->
     <div>
-      <div class="text-h6 q-my-md text-weight-bold">{{comments.length }} comments</div>
+      <div class="text-h6 q-my-md text-weight-bold">
+        {{ comments.length }} comments
+      </div>
       <!-- comment starts here -->
       <div
         class="row q-my-xl cm q-pb-xl"
@@ -42,135 +44,6 @@
             </div>
           </div>
         </div>
-
-        <!--  reply start  here -->
-        <!-- <div
-          class="row q-mt-lg q-ml-xl"
-          v-for="reply in comment.replies"
-          :key="reply"
-        >
-          <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1 col-xl-1 q-pr-xl">
-            <div class="image">
-              <img
-                src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2019/10/Author.jpg"
-                alt=""
-              />
-            </div>
-          </div> -->
-        <!-- <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 col-xl-10 q-ml-sm">
-            <div class="text">
-              <div class="text-h4 text-weight-bold">
-                <a href="">{{ reply.rName }} </a> <q-icon name="far fa-edit" />
-              </div>
-              <div class="text-caption" style="color: #acabab">
-                {{ moment(reply.createdAt).fromNow() }} - -->
-        <!-- <input
-                  type="checkbox"
-                  class="whitelist"
-                  v-model="show1"
-                  @change="listChanger()"
-                /> -->
-
-        <!-- <span class="text-weight-bold"> Reply</span>
-              </div>
-              <div class="text-body2">
-                {{ reply.rText }}
-              </div>
-            </div> -->
-
-        <!--
-          </div> -->
-        <!-- <div
-            class="col-sm-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-            v-if="showInside"
-            v-click-outside="closeEvent"
-          >
-            <div class="">
-              <div class="text-h6 q-my-md text-weight-bold">
-                Leave a reply:
-
-                <span class="q-ml-sm text-weight-bold"
-                  >Cancel Reply
-                  <button class="button" @click="hide">Close</button></span
-                >
-              </div>
-              <div class="text-body1 q-my-sm">
-                Your email address will not be published.
-              </div>
-
-              <q-form>
-                <q-input
-                  outlined
-                  rows="10"
-                  class="text__area"
-                  clearable
-                  type="textarea"
-                  v-model="rText"
-                />
-                <div class="row q-my-md q-col-gutter-sm">
-                  <div
-                    class="
-                      col-xs-12 col-sm-4 col-md-4
-                      q-my-xs
-                      col-lg-4 col-xl-4
-                    "
-                  >
-                    <q-input
-                      outlined
-                      dense
-                      v-model="rName"
-                      type="text"
-                      placeholder="name"
-                    />
-                  </div>
-
-                  <div
-                    class="
-                      col-xs-12 col-sm-4 col-md-4
-                      q-my-xs
-                      col-lg-4 col-xl-4
-                    "
-                  >
-                    <q-input
-                      v-model="rEmail"
-                      outlined
-                      dense
-                      type="email"
-                      placeholder="email"
-                    />
-                  </div>
-                  <div
-                    class="
-                      col-xs-12 col-sm-4 col-md-4
-                      q-my-xs
-                      col-lg-4 col-xl-4
-                    "
-                  >
-                    <q-input
-                      v-model="weblink"
-                      dense
-                      outlined
-                      type="url"
-                      placeholder="website"
-                    />
-                  </div>
-                </div>
-
-                <q-btn
-                  outline
-                  size="md"
-                  rounded
-                  type="submit"
-                  @click.prevent="onReply(comment.id)"
-                  no-caps
-                  color="grey-13"
-                  label="Post reply"
-                />
-
-              </q-form>
-            </div>
-          </div> -->
-        <!-- </div> -->
 
         <!-- reply  to comment form starts here -->
       </div>

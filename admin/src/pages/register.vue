@@ -99,7 +99,9 @@ export default {
         formData.append("name", this.name);
         formData.append("password", this.password);
         formData.append("description", this.description);
+    console.log("this is formData", formData)
         const response = await AuthenticationService.register(formData);
+             console.log(response)
         this.$q.notify({
           type: "positive",
           timeout: 2000,

@@ -34,9 +34,7 @@ exports.createCategory = asyncHandler(async (req, res, next) => {
   const category = await Category.create({
     ...req.body,
     userId: req.user.id,
-  })
-    .skip(1)
-    .limit(4);
+  });
 
   return res.status(200).json({ sucess: true, data: category });
 });
