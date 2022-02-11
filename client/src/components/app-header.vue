@@ -167,8 +167,7 @@ export default {
   padding: 9px 24px;
 }
 a {
-  text-decoration: none;
-  color: #1d1d1d;
-  text-decoration: none;
+  text-decoration: none !important;
+  color: #000 !important;
 }
 </style>

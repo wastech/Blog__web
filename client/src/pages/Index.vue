@@ -32,7 +32,7 @@
                 params: { id: item._id },
               }"
             >
-              <div class="text-h3 text-bold text-capitalize">
+              <div class="text-h3 text-bolder text-capitalize">
                 {{ item.title }}
               </div>
             </router-link>
@@ -88,7 +88,7 @@
             <div class="text-body1" v-html="item.description"></div>
           </div>
 
-          <div class="button q-mb-xl">
+          <div class="button q-mb-lg">
             <router-link
               v-bind:to="{
                 name: 'single',
@@ -102,7 +102,6 @@
               />
             </router-link>
 
-            <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
             <span>
               <q-icon
                 name="fab fa-facebook-f"
@@ -119,7 +118,6 @@
               ></q-icon>
             </span>
           </div>
-          <div class="q-pa-lg flex flex-center"></div>
         </div>
       </div>
     </section>
@@ -149,7 +147,6 @@ export default {
         await postService.getPosts().then((response) => {
           this.items = response.data.data;
           this.loading = false;
-          console.log(this.items);
         });
       } catch (err) {
         console.log(err.response);
@@ -183,19 +180,34 @@ export default {
   object-fit: cover;
   height: 50vh;
 }
+
 .text-h3 {
   font-size: 23px;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 2rem;
 }
-a {
-  text-decoration: none;
-
-  color: #222;
+/* a {
+  text-decoration: none !important;
+  border-bottom: 2px dotted #ccc;
+  padding-bottom: 1px;
+  color: #000;
+} */
+/* a:link {
+  color: #000 !important;
+  so-language: zxx !important;
+  text-decoration: none !important; 
+} */
+a,
+.router-link-active {
+  text-decoration: none !important;
+  color: #000 !important;
   border-bottom: 2px dotted #ccc;
   padding-bottom: 1px;
 }
 .avatar {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   vertical-align: middle;
   object-fit: cover;

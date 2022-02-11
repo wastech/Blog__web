@@ -4,6 +4,7 @@ import axios from "axios";
 export default () => {
   return axios.create({
     baseURL: `https://wasblog.herokuapp.com/api/v1/`,
+    //  baseURL: `http://localhost:3000/api/v1`
     // headers: {
     //   Authorization: `Bearer ${store.state.token}`,
     // },

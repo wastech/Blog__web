@@ -36,7 +36,7 @@ img {
   border-radius: 50%;
   width: 70px;
   height: 70px;
-  object-fit: contain;
+  object-fit: cover;
 }
 .text-h4 {
   font-size: 15px;

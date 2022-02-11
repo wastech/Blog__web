@@ -23,10 +23,12 @@ export default defineComponent({
   color: #545454;
   background-color: #fff; */
 
-  color: #222;
-  font-size: 15px;
+ 
   line-height: 27px;
   overflow-x: hidden;
   word-break: break-word;
+  
 }
+
+
 </style>

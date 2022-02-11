@@ -7,8 +7,8 @@
         v-for="item in items"
         :key="item"
       >
-        <div class="image "  v-if="item.imageUrl">
-          <img :src="item.imageUrl" class=" shadow-3" alt="" />
+        <div class="image" v-if="item.imageUrl">
+          <img :src="item.imageUrl" class="shadow-3" alt="" />
         </div>
         <div class="text q-mb-xl">
           <router-link
@@ -68,5 +68,24 @@ img {
   font-size: 15px;
   line-height: 27px;
   word-break: break-word;
+}
+/* a,
+.router-link-active {
+  text-decoration: none !important;
+  color: #000 !important;
+  border-bottom: 2px dotted #ccc;
+  padding-bottom: 1px;
+} */
+
+a {
+  text-decoration: none !important;
+
+  color: #ccc !important;
+}
+a:hover {
+  text-decoration: none;
+
+  color: #ccc;
+  border-bottom: 2px dotted #ccc;
 }
 </style>

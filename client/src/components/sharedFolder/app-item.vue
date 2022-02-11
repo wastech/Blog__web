@@ -83,7 +83,7 @@
             class="q-mr-lg continue__button"
           />
         </router-link>
-        <q-btn no-shadow round class="q-mr-xs" icon="fas fa-share" />
+       
         <span>
           <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs" />
 
@@ -135,10 +135,10 @@ export default {
 .text-h3 {
   font-size: 23px;
 }
-a {
-  text-decoration: none;
-
-  color: #222;
+a,
+.router-link-active {
+  text-decoration: none !important;
+  color: #000 !important;
   border-bottom: 2px dotted #ccc;
   padding-bottom: 1px;
 }
