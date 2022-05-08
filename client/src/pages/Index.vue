@@ -18,9 +18,9 @@
           <img
             :src="item.imageUrl"
             class="shadow-3"
-            alt=""
+            alt="item.title"
             v-bind:style="
-              $q.screen.lt.md ? { height: '25vh' } : { height: '50vh' }
+              $q.screen.lt.md ? { height: '25h' } : { height: '40vh' }
             "
           />
         </div>
@@ -29,8 +29,10 @@
             <router-link
               v-bind:to="{
                 name: 'single',
+
                 params: { id: item._id },
               }"
+              class="a__boder"
             >
               <div class="text-h3 text-bolder text-capitalize">
                 {{ item.title }}
@@ -43,17 +45,21 @@
             <span
               ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
             </span>
-            <router-link
-              v-bind:to="{
-                name: 'category',
-                params: { id: item.categoryId._id },
-              }"
-            >
-              <span class="q-mr-md" v-if="item.categoryId"
-                >In {{ item.categoryId.title }}
-              </span>
-            </router-link>
 
+            <span class="q-mr-md">
+              In
+              <span class="q-ml-sm"
+                ><router-link
+                  v-bind:to="{
+                    name: 'category',
+                    params: { id: item.categoryId._id },
+                  }"
+                  class="a__boder"
+                >
+                  {{ item.categoryId.title }}
+                </router-link></span
+              >
+            </span>
             <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
               >Tags
               <router-link
@@ -61,6 +67,7 @@
                   name: 'tags',
                   params: { id: tag },
                 }"
+                class="a__boder"
               >
                 {{ tag }}
               </router-link>
@@ -76,8 +83,9 @@
                   name: 'author-page',
                   params: { id: item.userId._id },
                 }"
+                class="a__boder"
               >
-                <a href="">{{ item.userId.name }}</a>
+                {{ item.userId.name }}
               </router-link>
             </span>
           </div>
@@ -85,13 +93,14 @@
 
           <!-- paragraph starts here -->
           <div class="paragraph q-my-md text-justify ellipsis-3-lines">
-            <div class="text-body1" v-html="item.description"></div>
+            <div class="text-body2" v-html="item.description"></div>
           </div>
 
           <div class="button q-mb-lg">
             <router-link
               v-bind:to="{
                 name: 'single',
+
                 params: { id: item._id },
               }"
             >
@@ -198,7 +207,7 @@ export default {
   so-language: zxx !important;
   text-decoration: none !important; 
 } */
-a,
+.a__boder,
 .router-link-active {
   text-decoration: none !important;
   color: #000 !important;

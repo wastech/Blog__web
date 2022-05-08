@@ -3,23 +3,23 @@
     <div class="image" v-if="item.imageUrl">
       <img
         :src="item.imageUrl"
-        alt=""
-        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '50vh' }"
+        :alt="item.title"
+        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '40vh' }"
       />
     </div>
     <div class="text">
       <div class="title text-left text-dark q-mt-sm q-mb-none">
-        <router-link
+        <!-- <router-link
           v-if="typeof item.id !== 'undefined'"
           v-bind:to="{
             name: 'single',
             params: { id: item._id },
           }"
-        >
-          <div class="text-h3 text-bold text-capitalize">
-            {{ item.title }}
-          </div>
-        </router-link>
+        > -->
+        <div class="text-h3 text-bold text-capitalize">
+          {{ item.title }}
+        </div>
+        <!-- </router-link> -->
       </div>
 
       <!-- icon section starts here -->
@@ -27,15 +27,21 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-        <router-link
-          v-if="item.categoryId"
-          v-bind:to="{
-            name: 'category',
-            params: { id: item.categoryId._id },
-          }"
-        >
-          <span class="q-mr-md">In {{ item.categoryId.title }} </span>
-        </router-link>
+        <span class="q-mr-md">
+          In
+          <span class="q-ml-sm"
+            ><router-link
+              v-if="item.categoryId"
+              v-bind:to="{
+                name: 'category',
+                params: { id: item.categoryId._id },
+              }"
+              class="a__boder"
+            >
+              {{ item.categoryId.title }}
+            </router-link></span
+          >
+        </span>
         <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
           >Tags
           <router-link
@@ -47,9 +53,9 @@
             {{ tag }}
           </router-link>
         </span>
-        <!-- <span class="q-mr-md">Tags <a href="" v-html="item.tags"></a> </span> -->
+
         <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
-        <!-- <span class="q-mr-md"><a href="">2 comments</a> </span> -->
+
         <span v-if="item.userId"
           ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
         /></span>
@@ -58,7 +64,7 @@
         </span>
       </div>
       <div class="paragraph q-my-md text-justify">
-        <div class="text-body1" v-html="item.description"></div>
+        <div class="text-body2" v-html="item.description"></div>
       </div>
 
       <div class="button q-mb-xl">

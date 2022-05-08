@@ -81,20 +81,20 @@ app.use(cors());
  
 // }
 // Production
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
   // Static folder
-  app.use(express.static(__dirname + "/dist/"));
+  // app.use(express.static(__dirname + "/dist/"));
 
   // handle & forward reqest errors
-  app.use((error, req, res, next) => {
-    res.status(error.statusCode || 500).json({
-      status: error.status,
-      message: error.message,
-    });
-  });
+  // app.use((error, req, res, next) => {
+  //   res.status(error.statusCode || 500).json({
+  //     status: error.status,
+  //     message: error.message,
+  //   });
+  // });
   // Handle SPA
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + "/dist/index.html"));
-}
+  // app.get(/.*/, (req, res) => res.sendFile(__dirname + "/dist/index.html"));
+// }
 
 
 // Mount routers

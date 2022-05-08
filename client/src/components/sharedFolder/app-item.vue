@@ -5,7 +5,7 @@
         :src="item.imageUrl"
         alt=""
         class="shadow-3"
-        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '50vh' }"
+        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '40vh' }"
       />
     </div>
     <div class="text">
@@ -16,6 +16,7 @@
             name: 'single',
             params: { id: item._id },
           }"
+          class="a__boder"
         >
           <div class="text-h3 text-bold text-capitalize">
             {{ item.title }}
@@ -35,6 +36,7 @@
             name: 'category',
             params: { id: item.categoryId._id },
           }"
+          class="a__boder"
         >
           <span class="q-mr-md">In {{ item.categoryId.title }} </span>
         </router-link>
@@ -45,6 +47,7 @@
               name: 'tags',
               params: { id: tag },
             }"
+            class="a__boder"
           >
             {{ tag }}
           </router-link>
@@ -59,8 +62,9 @@
               name: 'author-page',
               params: { id: item.userId._id },
             }"
+            class="a__boder"
           >
-            <a href="">{{ item.userId.name }}</a>
+            {{ item.userId.name }}
           </router-link>
         </span>
       </div>
@@ -83,7 +87,7 @@
             class="q-mr-lg continue__button"
           />
         </router-link>
-       
+
         <span>
           <q-icon name="fab fa-facebook-f" size="xs" class="q-mr-xs" />
 
@@ -135,7 +139,7 @@ export default {
 .text-h3 {
   font-size: 23px;
 }
-a,
+.a__boder,
 .router-link-active {
   text-decoration: none !important;
   color: #000 !important;
