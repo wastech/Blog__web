@@ -12,7 +12,7 @@
             class="shadow-3"
             :alt="item.title"
             v-bind:style="
-              $q.screen.lt.md ? { height: '25h' } : { height: '40vh' }
+              $q.screen.lt.md ? { height: '20h' } : { height: '40vh' }
             "
           />
         </div>
@@ -195,7 +195,7 @@ export default {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
-  height: 50vh;
+ 
 }
 
 .text-h3 {
