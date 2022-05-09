@@ -20,7 +20,7 @@
             <input dark outlined type="file" ref="file" @change="onSelect()" />
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            {{options._id}}
+            {{ options._id }}
             <q-select
               filled
               v-model="categoryId"
@@ -28,20 +28,16 @@
               :options="options"
               emit-value
               map-options
-             option-value="_id"
+              option-value="_id"
               option-label="title"
               label="select category"
             />
           </div>
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <q-select
-              filled
+            <q-input
+              outlined
               v-model="tags"
-              :options="optionsT"
-              multiple
-              :rules="[(val) => !!val || 'Field is required']"
-              use-chips
-              label="Tags"
+              placeholder="e.g.(Javascript, css, html"
             />
           </div>
 
@@ -159,11 +155,10 @@ export default {
     return {
       title: "",
       description: "",
-      tags: ["People"],
+      tags: [],
       categoryId: "",
       options: [],
       file: "",
-      optionsT: ["People", "Design", "photograph", "Girl", "Work", "city"],
     };
   },
   methods: {
