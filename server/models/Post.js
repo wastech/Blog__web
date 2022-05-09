@@ -15,13 +15,14 @@ const PostSchema = new Schema(
 
     imageUrl: {
       type: String,
-      match: [/^(ftp|http|https):\/\/[^ "]+$/, "Invalid url"], //ftp 
+      match: [/^(ftp|http|https):\/\/[^ "]+$/, "Invalid url"], //ftp
       default: [
         "https://res.cloudinary.com/agustems/image/upload/v1598881434/roomer/no-image_klm" +
           "dah.png",
       ],
     },
-    cloudinary_id: { //image_id
+    cloudinary_id: {
+      //image_id
       type: String,
     },
     views: {
@@ -29,7 +30,10 @@ const PostSchema = new Schema(
       default: 0,
     },
 
-    tags: [String],
+    tags: {
+      type: Array,
+      required: true,
+    },
     categoryId: {
       type: mongoose.Schema.ObjectId,
       ref: "Category",

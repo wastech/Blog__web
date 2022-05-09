@@ -1,51 +1,57 @@
 <template>
   <div class="main">
-    <!-- <app-header /> -->
-    <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
-    <div class="title q-pa-xs">
-      <div class="text-h5 text-weight-bolder">
-        <span class="q-pa-sm">Category: {{ category }}</span>
+    <div class="text-captio" v-if="loading"></div>
+    <section v-else>
+      <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
+      <div class="title q-pa-xs">
+        <div class="text-h5 text-weight-bolder">
+          <span class="q-pa-sm text-capitalize">Category: {{ category }}</span>
+        </div>
       </div>
-    </div>
-    <div v-for="item in items" :key="item.id">
-      <app-item :item="item" />
-    </div>
+      <div v-for="item in items" :key="item.id">
+        <app-item :item="item" />
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import moment from "moment";
-// import appHeader from "../components/app-header.vue";
+import { defineAsyncComponent } from "vue";
 import postService from "../services/postService";
-import AppItem from "../components/sharedFolder/app-item.vue";
 
 export default {
   name: "PageIndex",
-  components: { AppItem },
+  components: {
+    AppItem: defineAsyncComponent(() =>
+      import("components/sharedFolder/app-item.vue")
+    ),
+  },
   data() {
     return {
+      loading: true,
       category: "",
       items: [],
       id: this.$route.params.id,
     };
   },
-  created: function () {
-    this.moment = moment;
-  },
+
   methods: {
     async getPosts() {
       try {
         await postService.getCategories(this.id).then((response) => {
           this.items = response.data.categories;
           this.category = response.data.categories[0].categoryId.title;
-          console.log(response.data.categories);
         });
       } catch (err) {
-        // console.log(err.response);
+        console.log(err.response);
+      } finally {
+        this.$q.loading.hide();
+        this.loading = false;
       }
     },
   },
   async mounted() {
+    this.$q.loading.show();
     this.getPosts();
   },
 };

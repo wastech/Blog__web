@@ -3,7 +3,7 @@
     <div class="image" v-if="item.imageUrl">
       <img
         :src="item.imageUrl"
-        alt=""
+        alt="item.title"
         class="shadow-3"
         v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '40vh' }"
       />
@@ -29,28 +29,34 @@
         <span
           ><q-icon name="fas fa-camera-retro" class="q-mr-md"></q-icon>
         </span>
-
-        <router-link
-          v-if="item.categoryId"
-          v-bind:to="{
-            name: 'category',
-            params: { id: item.categoryId._id },
-          }"
-          class="a__boder"
-        >
-          <span class="q-mr-md">In {{ item.categoryId.title }} </span>
-        </router-link>
-        <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
-          >Tags
-          <router-link
-            v-bind:to="{
-              name: 'tags',
-              params: { id: tag },
-            }"
-            class="a__boder"
+        <span class="q-mr-md">
+          In
+          <span class="q-ml-sm"
+            ><router-link
+              v-bind:to="{
+                name: 'category',
+                params: { id: item.categoryId._id },
+              }"
+              class="a__boder"
+            >
+              {{ item.categoryId.title }}
+            </router-link></span
           >
-            {{ tag }}
-          </router-link>
+        </span>
+        <span class="q-mr-md"
+          >Tags
+          <span v-for="(tag, index) in item.tags" :key="index" class="q-mx-xs">
+            <router-link
+               v-if="typeof tag !== 'undefined'"
+              v-bind:to="{
+                name: 'tags',
+                params: { id: tag },
+              }"
+              class="a__boder"
+              v-html="tag"
+            >
+            </router-link>
+          </span>
         </span>
         <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
         <span v-if="item.userId"

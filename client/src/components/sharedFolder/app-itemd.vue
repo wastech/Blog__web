@@ -9,17 +9,9 @@
     </div>
     <div class="text">
       <div class="title text-left text-dark q-mt-sm q-mb-none">
-        <!-- <router-link
-          v-if="typeof item.id !== 'undefined'"
-          v-bind:to="{
-            name: 'single',
-            params: { id: item._id },
-          }"
-        > -->
         <div class="text-h3 text-bold text-capitalize">
           {{ item.title }}
         </div>
-        <!-- </router-link> -->
       </div>
 
       <!-- icon section starts here -->
@@ -42,16 +34,19 @@
             </router-link></span
           >
         </span>
-        <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
+        <span class="q-mr-md"
           >Tags
-          <router-link
-            v-bind:to="{
-              name: 'tags',
-              params: { id: tag },
-            }"
-          >
-            {{ tag }}
-          </router-link>
+          <span v-for="(tag, index) in item.tags" :key="index" class="q-mx-xs">
+            <router-link
+              v-if="typeof tag !== 'undefined'"
+              v-bind:to="{
+                name: 'tags',
+                params: { id: tag },
+              }"
+              v-html="tag"
+            >
+            </router-link>
+          </span>
         </span>
 
         <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
@@ -90,9 +85,7 @@ import moment from "moment";
 export default {
   props: ["item"],
   data() {
-    return {
-      // show_filter: false,
-    };
+    return {};
   },
   created: function () {
     this.moment = moment;

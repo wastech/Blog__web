@@ -7,12 +7,12 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
 /* eslint-env node */
-const path = require("path");
+// const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { configure } = require("quasar/wrappers");
 
 module.exports = configure(function (ctx) {
-  outputDir: path.resolve(__dirname, "../server/dist");
+  // outputDir: path.resolve(__dirname, "../server/dist");
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -38,14 +38,14 @@ module.exports = configure(function (ctx) {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
-     // "material-icons", // optional, you are not bound to it
+      "roboto-font", // optional, you are not bound to it
+      // "material-icons", // optional, you are not bound to it
     ],
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
-      distDir: ctx.mode.spa ? "public" : null,
+      // distDir: ctx.mode.spa ? "public" : null,
       // transpile: false,
       // publicPath: '/',
 
@@ -95,7 +95,7 @@ module.exports = configure(function (ctx) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Notify"],
+      plugins: ["Notify", "Loading"],
     },
 
     // animations: 'all', // --- includes all animations

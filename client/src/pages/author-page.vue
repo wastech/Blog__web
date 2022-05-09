@@ -16,12 +16,14 @@
 </template>
 
 <script>
-// import appHeader from "../components/app-header.vue";
+import { defineAsyncComponent } from "vue";
 import postService from "../services/postService";
-import AppItem from "../components/sharedFolder/app-item.vue";
-
 export default {
-  components: { AppItem },
+  components: {
+    AppItem: defineAsyncComponent(() =>
+      import("components/sharedFolder/app-item.vue")
+    ),
+  },
   name: "PageIndex",
   data() {
     return {
@@ -40,11 +42,11 @@ export default {
           this.description = response.data.userPosts[0].userId.description;
         });
       } catch (err) {
-        // console.log(err.response);
+        console.log(err.response);
       }
     },
   },
-  async mounted() {
+   mounted() {
     this.getPosts();
   },
 };

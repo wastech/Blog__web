@@ -49,34 +49,78 @@
       </div>
     </div>
     <!-- app-comment -->
-    <!-- <reply-form /> -->
-    <add-comment :postId="item._id" />
+
+    <div class="q-mb-xl">
+      <div class="text-h6 q-my-md text-weight-bold">Leave a Comment:</div>
+      <div class="text-body1 q-my-sm">
+        Your email address will not be published.
+      </div>
+      <q-form>
+        <q-input
+          outlined
+          rows="10"
+          class="text__area"
+          v-model="text"
+          clearable
+          :rules="[(val) => !!val || 'Field is required']"
+          type="textarea"
+        />
+        <div class="row q-my-md q-col-gutter-sm">
+          <div
+            class="col-xs-12 col-sm-12 col-md-12 q-my-xs col-lg-12 col-xl-12"
+          >
+            <q-input
+              outlined
+              dense
+              type="text"
+              v-model="name"
+              :rules="[(val) => !!val || 'Field is required']"
+              placeholder="name"
+            />
+          </div>
+        </div>
+
+        <q-btn
+          outline
+          size="md"
+          rounded
+          type="submit"
+          no-caps
+          @click.prevent="onSubmit"
+          color="grey-13"
+          label="Post Comment"
+        />
+        <!-- ... -->
+      </q-form>
+    </div>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+import { defineAsyncComponent } from "vue";
 import postService from "../services/postService";
 import commentService from "../services/commentService";
-import replyService from "../services/replyService";
-import AppAuthor from "../components/app-author.vue";
-// import AppComment from "../components/app-comment.vue";
-import RelatedPost from "../components/related-post.vue";
-// import ReplyForm from "../components/reply-form.vue";
-import AppItem from "../components/sharedFolder/app-itemd.vue";
-import AddComment from "../components/comments/addComment.vue";
 
 export default {
-  components: { AppItem, RelatedPost, AppAuthor, AddComment },
+  components: {
+    AppItem: defineAsyncComponent(() =>
+      import("components/sharedFolder/app-itemd.vue")
+    ),
+
+    RelatedPost: defineAsyncComponent(() =>
+      import("components/related-post.vue")
+    ),
+
+    AppAuthor: defineAsyncComponent(() => import("components//app-author.vue")),
+  },
   name: "PageIndex",
   data() {
     return {
       id: this.$route.params.id,
-      rText: "",
       showInside: false,
-      rName: "",
-      weblink: "",
-      rEmail: "",
+      text: "",
+      name: "",
       comments: [],
       replies: [],
       item: {},
@@ -87,55 +131,15 @@ export default {
   },
 
   methods: {
-    show: function () {
-      this.showInside = true;
-    },
-    hide: function () {
-      console.log("hide");
-      this.showInside = false;
-    },
-
-    async getPost() {
-      try {
-        await postService.showpost(this.id).then((response) => {
-          this.item = response.data.post;
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    async getComments() {
-      try {
-        await commentService.getComments(this.id).then((response) => {
-          this.comments = response.data.data;
-
-          // this.replies = response.data.data.replies;
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    //  async getReplies(commentId) {
-    //   try {
-    //     await replyService.getReply(commentId).then((response) => {
-    //       this.replies = response.data.data;
-
-    //     });
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-    async onReply(commentId) {
-      const rComment = {
-        commentId: commentId,
-        rText: this.rText,
-        rName: this.rName,
-        weblink: this.weblink,
-        rEmail: this.rEmail,
+    async onSubmit() {
+      const comment = {
+        postId: this.id,
+        text: this.text,
+        name: this.name,
       };
+
       try {
-        console.log(rComment);
-        await replyService.createReply(rComment).then((response) => {
+        await commentService.postComment(comment).then((response) => {
           this.getComments();
           this.$q.notify({
             type: "positive",
@@ -150,25 +154,35 @@ export default {
           type: "negative",
           timeout: 1000,
           position: "center",
-          message: "All Fields required and must be at least 4 characters long",
+          message: "All Fields are required ",
         });
       }
-      // this.text = "";
-      // this.name = "";
-      // this.email = "";
-      // this.url = "";
+      this.text = "";
+      this.name = "";
+    },
+    async getPost() {
+      try {
+        await postService.showpost(this.id).then((response) => {
+          this.item = response.data.post;
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getComments() {
+      try {
+        await commentService.getComments(this.id).then((response) => {
+          this.comments = response.data.data;
+        });
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
-  events: {
-    closeEvent: function () {
-      console.log("close event called");
-      this.hide();
-    },
-  },
+
   async mounted() {
     this.getPost();
     this.getComments();
-    // this.getReplies()
   },
 };
 </script>

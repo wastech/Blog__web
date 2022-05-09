@@ -1,16 +1,8 @@
 <template>
   <div class="main q-pa-md">
-    <div class="progres">
-      <q-linear-progress
-        dark
-        rounded
-        indeterminate
-        color="secondary"
-        class="q-mt-sm"
-        v-if="loading"
-      />
-    </div>
-    <section v-if="!loading">
+    <div class="text-captio" v-if="loading"></div>
+
+    <section v-else>
       <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
       <!-- <app-header /> -->
       <div class="" v-for="item in items" :key="item">
@@ -18,7 +10,7 @@
           <img
             :src="item.imageUrl"
             class="shadow-3"
-            alt="item.title"
+            :alt="item.title"
             v-bind:style="
               $q.screen.lt.md ? { height: '25h' } : { height: '40vh' }
             "
@@ -50,6 +42,7 @@
               In
               <span class="q-ml-sm"
                 ><router-link
+                  v-if="typeof item.categoryId._id !== 'undefined'"
                   v-bind:to="{
                     name: 'category',
                     params: { id: item.categoryId._id },
@@ -60,22 +53,33 @@
                 </router-link></span
               >
             </span>
-            <span class="q-mr-md" v-for="tag in item.tags" :key="tag"
-              >Tags
-              <router-link
-                v-bind:to="{
-                  name: 'tags',
-                  params: { id: tag },
-                }"
-                class="a__boder"
-              >
-                {{ tag }}
-              </router-link>
+            <span>
+              <span class="q-mr-md"
+                >Tags
+                <span
+                  v-for="(tag, index) in item.tags"
+                  :key="index"
+                  class="q-mx-xs"
+                >
+                  <router-link
+                    v-if="typeof tag !== 'undefined'"
+                    v-bind:to="{
+                      name: 'tags',
+                      params: { id: tag },
+                    }"
+                    class="a__boder"
+                    v-html="tag"
+                  >
+                  </router-link>
+                </span>
+              </span>
             </span>
-
             <span class="q-mr-md">{{ moment(item.createdAt).fromNow() }}</span>
             <span
-              ><img :src="item.userId.avatar.url" alt="" class="avatar q-mr-md"
+              ><img
+                :src="item.userId.avatar.url"
+                :alt="item.userId.name"
+                class="avatar q-mr-md"
             /></span>
             <span class="q-mr-md text-capitalize" v-if="item.userId">
               <router-link
@@ -155,14 +159,18 @@ export default {
       try {
         await postService.getPosts().then((response) => {
           this.items = response.data.data;
-          this.loading = false;
         });
       } catch (err) {
         console.log(err.response);
+      } finally {
+        this.$q.loading.hide();
+        this.loading = false;
       }
     },
   },
   async mounted() {
+    this.loading = true;
+    this.$q.loading.show();
     this.queryindex();
   },
 };
@@ -196,17 +204,7 @@ export default {
   letter-spacing: normal;
   line-height: 2rem;
 }
-/* a {
-  text-decoration: none !important;
-  border-bottom: 2px dotted #ccc;
-  padding-bottom: 1px;
-  color: #000;
-} */
-/* a:link {
-  color: #000 !important;
-  so-language: zxx !important;
-  text-decoration: none !important; 
-} */
+
 .a__boder,
 .router-link-active {
   text-decoration: none !important;

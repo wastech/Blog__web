@@ -23,13 +23,15 @@
 </template>
 
 <script>
-// import appHeader from "../components/app-header.vue";
-import postService from "../services/postService";
+import { defineAsyncComponent } from "vue";
 import Api from "../services/Api";
-import AppItem from "../components/sharedFolder/app-item.vue";
 
 export default {
-  components: { AppItem },
+ components: {
+    AppItem: defineAsyncComponent(() =>
+      import("components/sharedFolder/app-item.vue")
+    ),
+  },
   name: "PageIndex",
   data() {
     return {
@@ -46,7 +48,7 @@ export default {
           .get(`posts/?keyword=${this.keyword}`)
           .then((response) => {
             this.items = response.data.data;
-            console.log(this.items);
+        
           });
       } catch (err) {
         // console.log(err.response);

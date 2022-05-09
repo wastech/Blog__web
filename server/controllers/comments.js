@@ -7,7 +7,7 @@ const Post = require("../models/Post");
 // @route   GET /api/v1/comments
 // @access  Private
 exports.getComments = asyncHandler(async (req, res, next) => {
-    const comments = await Comment.find({});
+  const comments = await Comment.find({});
   res.status(200).json({ data: comments });
 });
 
@@ -32,7 +32,6 @@ exports.getCommentByPostId = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/comments/
 // @access  Private
 exports.createComment = asyncHandler(async (req, res, next) => {
-  console.log(req.body.postId);
   let post = await Post.findOne({
     _id: req.body.postId,
     status: "public",

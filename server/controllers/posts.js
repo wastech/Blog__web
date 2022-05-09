@@ -10,18 +10,18 @@ exports.addPost = asyncHandler(async (req, res, next) => {
     folder: "post",
     resource_type: "auto",
   });
-
-  let post = new Post({
-    title: req.body.title,
-    description: req.body.description,
-    tags: req.body.tags,
-    categoryId: req.body.categoryId,
+  const { title, description, categoryId } = req.body;
+  const tags = req.body.tags.replace(/\s/g, "").split(",");
+  const post = await Post.create({
+    tags,
+    description,
+    title,
+    categoryId,
     userId: req.user.id,
     imageUrl: result.secure_url,
     cloudinary_id: result.public_id,
   });
-  // Save user
-  await post.save();
+  console.log("first", post)
 
   res.status(200).json({ success: true, data: post });
 });

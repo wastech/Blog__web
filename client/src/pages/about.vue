@@ -10,7 +10,7 @@
     <div class="image">
       <img
         src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Father-and-Child.jpg"
-        alt=""
+        alt="wastech"
       />
     </div>
     <div class="paragraph">

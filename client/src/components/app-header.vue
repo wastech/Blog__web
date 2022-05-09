@@ -7,14 +7,23 @@
 
           <q-btn-dropdown stretch flat label="Posts" no-caps>
             <q-list>
-              <q-item clickable v-ripple>
-                <q-item-section>Image Post</q-item-section>
-              </q-item>
-              <q-item clickable v-ripple>
-                <q-item-section>Video Post</q-item-section>
-              </q-item>
-              <q-item clickable v-ripple>
-                <q-item-section>Audio Post</q-item-section>
+              <q-item
+                clickable
+                v-ripple
+                v-for="category in categories"
+                :key="category"
+              >
+                <q-item-section>
+                  <router-link
+                    v-bind:to="{
+                      name: 'category',
+                      params: { id: category._id },
+                    }"
+                    class="a__boder"
+                  >
+                    {{ category.title }}
+                  </router-link></q-item-section
+                >
               </q-item>
             </q-list>
           </q-btn-dropdown>
@@ -43,7 +52,7 @@
             />
             <q-btn
               class="q-ml-xs"
-              icon="search"
+              icon="fas fa-search"
               @click="show_filter = !show_filter"
               flat
             />
@@ -68,19 +77,13 @@
 
           <q-expansion-item label="Posts">
             <q-list class="q-pl-lg">
-              <q-item to="/-" active-class="q-item-no-link-highlighting">
+              <q-item
+                v-for="category in categories"
+                :key="category"
+                active-class="q-item-no-link-highlighting"
+              >
                 <q-item-section>
-                  <q-item-label>Image Post</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item to="/" active-class="q-item-no-link-highlighting">
-                <q-item-section>
-                  <q-item-label>video Post</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item to="/" active-class="q-item-no-link-highlighting">
-                <q-item-section>
-                  <q-item-label>Audio Post</q-item-label>
+                  <q-item-label>{{ category.title }}</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -102,6 +105,7 @@
             :name="icon.iconName"
             v-for="icon in icons"
             :key="icon"
+            :to="icon.link"
             class="q-mr-lg"
           />
         </div>
@@ -125,6 +129,7 @@
 </template>
 
 <script>
+import categoriesService from "../services/categoriesService";
 export default {
   data() {
     return {
@@ -133,6 +138,7 @@ export default {
       keyword: "",
       tab: "",
       text: "",
+      categories: [],
       icons: [
         { iconName: "fab fa-facebook-f" },
         { iconName: "fab fa-twitter", link: "https://twitter.com/wastech_a" },
@@ -152,6 +158,18 @@ export default {
         this.$router.push(`/searchpage/${this.keyword}`);
       }
     },
+    async getPosts() {
+      try {
+        await categoriesService.cate().then((response) => {
+          this.categories = response.data.data;
+        });
+      } catch (err) {
+        console.log(err.response);
+      }
+    },
+  },
+  mounted() {
+    this.getPosts();
   },
 };
 </script>
