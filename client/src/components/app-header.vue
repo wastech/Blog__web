@@ -83,18 +83,26 @@
                 active-class="q-item-no-link-highlighting"
               >
                 <q-item-section>
-                  <q-item-label>{{ category.title }}</q-item-label>
+                  <router-link
+                    v-bind:to="{
+                      name: 'category',
+                      params: { id: category._id },
+                    }"
+                    class="a__boder"
+                  >
+                    <q-item-label>{{ category.title }}</q-item-label>
+                  </router-link>
                 </q-item-section>
               </q-item>
             </q-list>
           </q-expansion-item>
 
-          <a href="/">
+          <a href="/about">
             <q-item clickable v-ripple>
               <q-item-section>About Me</q-item-section>
             </q-item>
           </a>
-          <a href="">
+          <a href="/contact">
             <q-item clickable v-ripple>
               <q-item-section>Contact Me</q-item-section>
             </q-item>
