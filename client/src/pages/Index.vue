@@ -212,6 +212,7 @@ export default {
   border-bottom: 2px dotted #ccc;
   padding-bottom: 1px;
 }
+
 .avatar {
   width: 40px;
   height: 40px;
