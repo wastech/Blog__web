@@ -5,7 +5,7 @@
         :src="item.imageUrl"
         alt="item.title"
         class="shadow-3"
-        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '40vh' }"
+        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '45vh' }"
       />
     </div>
     <div class="text">
@@ -47,7 +47,7 @@
           >Tags
           <span v-for="(tag, index) in item.tags" :key="index" class="q-mx-xs">
             <router-link
-               v-if="typeof tag !== 'undefined'"
+              v-if="typeof tag !== 'undefined'"
               v-bind:to="{
                 name: 'tags',
                 params: { id: tag },
@@ -130,7 +130,6 @@ export default {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
-  height: 50vh;
 }
 .continue__button {
   color: #000;
@@ -144,6 +143,9 @@ export default {
 }
 .text-h3 {
   font-size: 23px;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 2rem;
 }
 .a__boder,
 .router-link-active {

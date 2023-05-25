@@ -4,7 +4,7 @@
       <img
         :src="item.imageUrl"
         :alt="item.title"
-        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '40vh' }"
+        v-bind:style="$q.screen.lt.md ? { height: '20vh' } : { height: '45vh' }"
       />
     </div>
     <div class="text">
@@ -101,6 +101,9 @@ export default {
 }
 .text-h3 {
   font-size: 23px;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 2rem;
 }
 a,
 .router-link-active {

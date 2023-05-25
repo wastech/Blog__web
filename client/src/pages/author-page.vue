@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <!-- <app-header /> -->
-    <div class="text-h4 text-dark q-my-lg text-bold">Writing</div>
+    <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
     <div class="title q-pa-xs">
       <div class="text-h5">
         <span class="q-pa-sm text-weight-bolder">Author: {{ userName }}</span>
@@ -9,7 +9,7 @@
         {{ description }}
       </div>
     </div>
-    <div v-for="item in items" :key="item">
+    <div v-for="item in items" :key="item" class="bd">
       <app-item :item="item" />
     </div>
   </div>
@@ -46,7 +46,7 @@ export default {
       }
     },
   },
-   mounted() {
+  mounted() {
     this.getPosts();
   },
 };
@@ -76,5 +76,9 @@ span {
   padding: 5px 20px;
   font-size: 15px;
   line-height: 27px;
+}
+.bd {
+  margin-bottom: 4em;
+  border-bottom: 0.1px solid #ccc;
 }
 </style>

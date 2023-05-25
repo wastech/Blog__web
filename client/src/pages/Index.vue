@@ -5,14 +5,14 @@
     <section v-else>
       <div class="text-h4 text-dark q-my-xl text-bold">Writing</div>
       <!-- <app-header /> -->
-      <div class="" v-for="item in items" :key="item">
+      <div class="bd" v-for="item in items" :key="item">
         <div class="image" v-if="item.imageUrl">
           <img
             :src="item.imageUrl"
             class="shadow-3"
             :alt="item.title"
             v-bind:style="
-              $q.screen.lt.md ? { height: '20h' } : { height: '40vh' }
+              $q.screen.lt.md ? { height: '20vh' } : { height: '45vh' }
             "
           />
         </div>
@@ -177,6 +177,10 @@ export default {
 </script>
 
 <style scoped>
+.bd {
+  margin-bottom: 4em;
+  border-bottom: 0.5px solid #ccc;
+}
 .continue__button {
   color: #000;
   border: 1px solid #f47e00 !important;
@@ -195,7 +199,6 @@ export default {
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
- 
 }
 
 .text-h3 {
@@ -291,5 +294,8 @@ span {
   background-color: #e2131e;
   cursor: pointer;
   visibility: invisible;
+}
+.image > img {
+  object-fit: cover;
 }
 </style>
